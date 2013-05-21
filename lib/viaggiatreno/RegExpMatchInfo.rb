@@ -1,6 +1,6 @@
 class RegExpMatchInfo
 
-  # TRAIN STATUSES
+  # regex to match train status (string)
   @@REGEXP_STATE_RUNNING = /(Il treno viaggia.*)(Ultimo rilevamento a)(.*)/
   @@REGEXP_STATE_NOT_STARTED = /Il treno non e' ancora partito/
   @@REGEXP_STATE_FINISHED = /Il treno e' arrivato.*/
@@ -10,8 +10,7 @@ class RegExpMatchInfo
   @@STR_DELAY_STR = "ritardo"
   @@STR_TRAIN_NUMBER_URL_REPLACE = "TRAINNUMBER"
 
-
-  # attr_reader is not available for class variables
+  # attr_reader for class variables
   def self.REGEXP_STATE_FINISHED() @@REGEXPSTATE_FINISHED end
   def self.REGEXP_STATE_RUNNING() @@REGEXP_STATE_RUNNING end
   def self.REGEXP_STATE_NOT_STARTED() @@REGEXP_STATE_NOT_STARTED end

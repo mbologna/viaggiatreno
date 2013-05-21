@@ -8,3 +8,4 @@ class ViaggiatrenoURLs
     def self.SITE_INFO_DETAILS() @@SITE_INFO_DETAILS end
 
 end
+

@@ -1,4 +1,5 @@
 class XPathMatchInfo
+    # xpath expression to retrieve train info
 	@@XPATH_STATUS = '//div[@class="evidenziato"]/strong'
 	@@XPATH_TRAIN_NAME = '//h1/text()'
 	@@XPATH_DETAILS_GENERIC = '//div[@class="giaeffettuate"] | //div[@class="corpocentrale"]'
@@ -13,3 +14,4 @@ class XPathMatchInfo
 	def self.XPATH_DETAILS_SCHEDULED_STOP_TIME() @@XPATH_DETAILS_SCHEDULED_STOP_TIME end
 	def self.XPATH_DETAILS_ACTUAL_STOP_TIME() @@XPATH_DETAILS_ACTUAL_STOP_TIME end
 end
+

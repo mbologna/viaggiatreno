@@ -1,5 +1,5 @@
 class TrainState
-	# Train Statuses
+	# Train status
 	@@RUNNING = "TRAVELING"
 	@@FINISHED = "ARRIVED"
 	@@NOT_STARTED = "NOT DEPARTED"
@@ -8,3 +8,4 @@ class TrainState
 	def self.FINISHED() @@FINISHED end
 	def self.NOT_STARTED() @@NOT_STARTED end
 end
+

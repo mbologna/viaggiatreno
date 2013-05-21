@@ -11,10 +11,15 @@ class TrainStop
 	end
 
 	def to_s
+	    retstr = ""
 		if @status == StopState.DONE
-			return "[X] #{trainStation} = SCHEDULED: #{scheduledStopTime} ACTUAL: #{actualStopTime}\n"
+			retstr += "\n[X]" 
 		elsif @status == StopState.TODO
-			return "[ ] #{trainStation} = SCHEDULED: #{scheduledStopTime} EXPECTED: #{actualStopTime}\n"
+			retstr += "\n[ ]" 
 		end
+		retstr += "#{trainStation} = SCHEDULED: #{scheduledStopTime} \
+		    EXPECTED: #{actualStopTime}\n"
+		return retstr
 	end
 end
+

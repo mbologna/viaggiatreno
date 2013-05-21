@@ -21,7 +21,8 @@ class Train
   end
 
   def to_s
-   return "#{@trainNumber} #{@trainName}: #{@status} state: #{@state}, delay: #{@delay}, lastUpdate: #{@lastUpdate} #{@trainStops}"
+   return "#{@trainNumber} #{@trainName}: #{@status} state: #{@state}, \
+   delay: #{@delay}, lastUpdate: #{@lastUpdate} #{@trainStops}"
   end
 
   def addStop(trainStop)
@@ -80,10 +81,12 @@ class Train
       return @trainStops[0].to_s
     end
     (self.trainStops.length-1).times do |i|
-      if self.trainStops[i].status.to_s == StopState.DONE && self.trainStops[i+1].status.to_s != StopState.DONE
+      if self.trainStops[i].status.to_s == StopState.DONE && \
+          self.trainStops[i+1].status.to_s != StopState.DONE
         return self.trainStops[i].to_s
       end
     end
     return self.trainStops[self.trainStops.length-1].to_s
   end
 end  
+

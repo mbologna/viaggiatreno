@@ -8,12 +8,13 @@ Gem::Specification.new do |gem|
   gem.version       = Viaggiatreno::VERSION
   gem.authors       = ["Michele Bologna"]
   gem.email         = ["michele.bologna@gmail.com"]
-  gem.description   = %q{Write a gem description}
-  gem.summary       = %q{Write a gem summary}
+  gem.description   = %q{A web scraper to fetch real time information on train riding the Italian railway system (viaggiatreno/trenitalia)}
+  gem.summary       = %q{A scraper for real time information on Italian railway system (viaggiatreno)}
   gem.homepage      = ""
 
   gem.files         = `git ls-files`.split($/)
   gem.executables   = gem.files.grep(%r{^bin/}).map{ |f| File.basename(f) }
   gem.test_files    = gem.files.grep(%r{^(test|spec|features)/})
   gem.require_paths = ["lib"]
+  gem.add_dependency "nokogiri"
 end
