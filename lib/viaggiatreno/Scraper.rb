@@ -45,7 +45,7 @@ class Scraper
         @train.state = TrainState.RUNNING
         @train.lastUpdate = @status.match(
             RegExpMatchInfo.REGEXP_STATE_RUNNING)[3].strip
-        @status = @status.match(RegExpMatchInfo.REGEXP_STATE_RUNNING)[1].rstrip()
+        @status = @status.match(RegExpMatchInfo.REGEXP_STATE_RUNNING)[1].rstrip
       else
         @train.state = TrainState.FINISHED
       end
@@ -55,7 +55,8 @@ class Scraper
     @train.trainName = @trainName
   end
  
-  # fetch and parse train details (departing and arriving station, intermediate stops)
+  # fetch and parse train details (departing and arriving station, 
+  # intermediate stops)
   def updateTrainDetails()
     doc = Nokogiri::HTML(open(@site_info_details))
     doc.xpath(XPathMatchInfo.XPATH_DETAILS_GENERIC).each do |x|
