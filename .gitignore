@@ -1,6 +1,5 @@
 *.gem
 *.rbc
-.bundle
 .config
 .yardoc
 Gemfile.lock
@@ -15,3 +14,8 @@ spec/reports
 test/tmp
 test/version_tmp
 tmp
+
+# Ignore bundle configuration
+/bin
+.bundle
+/vendor/bundle
