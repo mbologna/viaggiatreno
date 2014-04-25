@@ -1,4 +1,4 @@
-# Viaggiatreno
+# Viaggiatreno [![Build Status](https://travis-ci.org/colmarius/viaggiatreno.svg)](https://travis-ci.org/colmarius/viaggiatreno)
 
 TODO: Write a gem description
 
