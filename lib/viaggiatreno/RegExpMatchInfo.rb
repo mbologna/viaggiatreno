@@ -9,6 +9,7 @@ class RegExpMatchInfo
   @@REGEXP_STOP_ALREADY_DONE = /giaeffettuate/
   @@STR_DELAY_STR = "ritardo"
   @@STR_TRAIN_NUMBER_URL_REPLACE = "TRAINNUMBER"
+  @@REGEXP_RAIL = /Binario Previsto: (\d+|--) Binario Reale: (\d+|--)/
 
   # attr_reader for class variables
   def self.REGEXP_STATE_FINISHED() @@REGEXPSTATE_FINISHED end
@@ -20,4 +21,5 @@ class RegExpMatchInfo
   def self.REGEXP_NODELAY_STR() @@REGEXP_NODELAY_STR end
   def self.REGEXP_STOP_ALREADY_DONE() @@REGEXP_STOP_ALREADY_DONE end
   def self.STR_TRAIN_NUMBER_URL_REPLACE() @@STR_TRAIN_NUMBER_URL_REPLACE end
+  def self.REGEXP_RAIL() @@REGEXP_RAIL end
 end
