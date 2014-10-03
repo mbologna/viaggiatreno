@@ -9,7 +9,6 @@ require_relative 'XPathMatchInfo'
 require_relative 'ViaggiatrenoURLs'
 
 class Scraper
-
   def initialize(trainNumber, train)
     @site_info_main = ViaggiatrenoURLs.SITE_INFO_MAIN.gsub(
         RegExpMatchInfo.STR_TRAIN_NUMBER_URL_REPLACE, trainNumber)
@@ -19,7 +18,7 @@ class Scraper
   end
 
   # fetch and parse basic train information (status, trainName, details)
-  def updateTrain()
+  def updateTrain
     doc = Nokogiri::HTML(open(@site_info_main))
     doc.xpath(XPathMatchInfo.XPATH_STATUS).each do |x|
       @status = StringUtils.remove_newlines_tabs_and_spaces(x)
@@ -29,11 +28,11 @@ class Scraper
     end
     if @status =~ RegExpMatchInfo.REGEXP_STATE_NOT_STARTED
       @train.state = TrainState.NOT_STARTED
-    elsif @status =~ RegExpMatchInfo.REGEXP_STATE_RUNNING or \
+    elsif @status =~ RegExpMatchInfo.REGEXP_STATE_RUNNING || \
         RegExpMatchInfo.REGEXP_STATE_FINISHED
       if @status =~ RegExpMatchInfo.REGEXP_NODELAY_STR
         @train.delay = 0
-      else 
+      else
         @train.delay = @status.match(RegExpMatchInfo.REGEXP_DELAY_STR)[1].to_i
         if @status.match(RegExpMatchInfo.REGEXP_DELAY_STR)[2] \
             != RegExpMatchInfo.STR_DELAY_STR
@@ -54,10 +53,10 @@ class Scraper
     @train.status = @status
     @train.trainName = @trainName
   end
- 
-  # fetch and parse train details (departing and arriving station, 
+
+  # fetch and parse train details (departing and arriving station,
   # intermediate stops)
-  def updateTrainDetails()
+  def updateTrainDetails
     doc = Nokogiri::HTML(open(@site_info_details))
     doc.xpath(XPathMatchInfo.XPATH_DETAILS_GENERIC).each do |x|
       x.xpath(XPathMatchInfo.XPATH_DETAILS_STATION_NAME).each do |stationName|
@@ -73,15 +72,14 @@ class Scraper
         @actualArrivalTime = StringUtils.remove_newlines_tabs_and_spaces(
             actualArrivalTime).to_s
       end
-      if x.attributes()['class'].to_s =~ RegExpMatchInfo.REGEXP_STOP_ALREADY_DONE
-        t = TrainStop.new(@stationName, @scheduledArrivalTime, 
+      if x.attributes['class'].to_s =~ RegExpMatchInfo.REGEXP_STOP_ALREADY_DONE
+        t = TrainStop.new(@stationName, @scheduledArrivalTime,
                           @actualArrivalTime, StopState.DONE)
       else
-        t = TrainStop.new(@stationName, @scheduledArrivalTime, 
+        t = TrainStop.new(@stationName, @scheduledArrivalTime,
                           @actualArrivalTime, StopState.TODO)
       end
       @train.addStop(t)
     end
   end
 end
-
