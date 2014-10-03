@@ -1,6 +1,7 @@
 # Viaggiatreno
 
-TODO: Write a gem description
+This gem parses Italian railway real-time status for trains (viaggiatreno.it).
+Use this API to fetch online information about Italian trains.
 
 ## Installation
 
@@ -18,7 +19,7 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+See examples at http://michelebologna.net
 
 ## Contributing
 
