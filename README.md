@@ -1,4 +1,4 @@
-https://travis-ci.org/mbologna/viaggiatreno.svg?branch=develop
+[![Build Status](https://travis-ci.org/mbologna/viaggiatreno.svg?branch=develop)](https://travis-ci.org/mbologna/viaggiatreno)
 
 # Viaggiatreno
 
