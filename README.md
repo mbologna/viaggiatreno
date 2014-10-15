@@ -1,3 +1,5 @@
+https://travis-ci.org/mbologna/viaggiatreno.svg?branch=develop
+
 # Viaggiatreno
 
 This gem parses Italian railway real-time status for trains (viaggiatreno.it).
