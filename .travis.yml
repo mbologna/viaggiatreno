@@ -10,4 +10,5 @@ notifications:
   recipients:
     - michele.bologna@gmail.com
     - marius.colacioiu@gmail.com
+sudo: false
 
