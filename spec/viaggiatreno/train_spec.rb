@@ -10,8 +10,8 @@ describe Train do
   end
 
   describe '#to_s' do
-    it { expect(@train.to_s).to eq "20241 REG 20241: Il treno e' arrivato con " + \
-                                   '2 minuti di ritardo state: ARRIVED,    delay: 2, lastUpdate:  '
+    it { expect(@train.to_s).to eq \
+      "20241 REG 20241: Il treno e' arrivato con 2 minuti di ritardo state: ARRIVED,     delay: 2, lastUpdate:  "
     }
   end
 
