@@ -1,4 +1,4 @@
-# Viaggiatreno [![Build Status](https://travis-ci.org/colmarius/viaggiatreno.svg)](https://travis-ci.org/colmarius/viaggiatreno)
+# Viaggiatreno [![Build Status](https://travis-ci.org/mbologna/viaggiatreno.svg)](https://travis-ci.org/mbologna/viaggiatreno)
 
 This gem parses Italian railway real-time status for trains (viaggiatreno.it).
 Use this API to fetch online information about Italian trains.
