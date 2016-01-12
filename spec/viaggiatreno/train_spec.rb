@@ -19,7 +19,7 @@ describe Train do
   describe '#trainStops' do
     before do
       VCR.use_cassette('Train train stops') do
-        @train_stops = @train.trainStops
+        @train_stops = @train.train_stops
       end
     end
 
@@ -53,7 +53,7 @@ describe Train do
   describe '#departingStation' do
     before do
       VCR.use_cassette('Train departing station') do
-        @departing_station = @train.departingStation
+        @departing_station = @train.departing_station
       end
     end
 
@@ -63,7 +63,7 @@ describe Train do
   describe '#arrivingStation' do
     before do
       VCR.use_cassette('Train arriving station') do
-        @arriving_station = @train.arrivingStation
+        @arriving_station = @train.arriving_station
       end
     end
 
@@ -73,7 +73,7 @@ describe Train do
   describe '#scheduledDepartingTime' do
     before do
       VCR.use_cassette('Train scheduled departing time') do
-        @scheduled_departing_time = @train.scheduledDepartingTime
+        @scheduled_departing_time = @train.scheduled_departing_time
       end
     end
 
@@ -83,7 +83,7 @@ describe Train do
   describe '#scheduledArrivingTime' do
     before do
       VCR.use_cassette('Train scheduled arriving time') do
-        @scheduled_arriving_time = @train.scheduledArrivingTime
+        @scheduled_arriving_time = @train.scheduled_arriving_time
       end
     end
 
@@ -93,7 +93,7 @@ describe Train do
   describe '#actualDepartingTime' do
     before do
       VCR.use_cassette('Train actual departing time') do
-        @actual_departing_time = @train.actualDepartingTime
+        @actual_departing_time = @train.actual_departing_time
       end
     end
 
@@ -103,7 +103,7 @@ describe Train do
   describe '#actualArrivingTime' do
     before do
       VCR.use_cassette('Train actual arriving time') do
-        @actual_arriving_time = @train.actualArrivingTime
+        @actual_arriving_time = @train.actual_arriving_time
       end
     end
 
@@ -113,7 +113,7 @@ describe Train do
   describe '#scheduledStopTime' do
     before do
       VCR.use_cassette('Train scheduled stop time') do
-        @scheduled_stop_time = @train.scheduledStopTime('SESTO CALENDE')
+        @scheduled_stop_time = @train.scheduled_stop_time('SESTO CALENDE')
       end
     end
 
@@ -123,7 +123,7 @@ describe Train do
   describe '#actualStopTime' do
     before do
       VCR.use_cassette('Train actual stop time') do
-        @actual_stop_time = @train.actualStopTime('SESTO CALENDE')
+        @actual_stop_time = @train.actual_stop_time('SESTO CALENDE')
       end
     end
 
@@ -133,7 +133,7 @@ describe Train do
   describe '#lastStop' do
     before do
       VCR.use_cassette('Train last stop') do
-        @last_stop = @train.lastStop
+        @last_stop = @train.last_stop
       end
     end
 
