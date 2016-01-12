@@ -1,6 +1,6 @@
 require_relative 'scraper.rb'
-require_relative 'TrainState.rb'
-require_relative 'TrainStop.rb'
+require_relative 'train_state.rb'
+require_relative 'train_stop.rb'
 
 class Train
   attr_accessor :train_number, :trainName, :delay, :status, :lastUpdate, :state
@@ -83,6 +83,7 @@ class Train
         return train_stops[i].to_s
       end
     end
+
     train_stops[train_stops.length - 1].to_s
   end
 end
