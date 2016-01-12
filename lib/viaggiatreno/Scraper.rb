@@ -4,7 +4,7 @@ require_relative 'TrainStop'
 require_relative 'TrainState'
 require_relative 'StringUtils'
 require_relative 'RegExpMatchInfo'
-require_relative 'StopState'
+require_relative 'stop_state'
 require_relative 'XPathMatchInfo'
 require_relative 'ViaggiatrenoURLs'
 
@@ -74,10 +74,10 @@ class Scraper
       end
       if x.attributes['class'].to_s =~ RegExpMatchInfo.REGEXP_STOP_ALREADY_DONE
         t = TrainStop.new(@stationName, @scheduledArrivalTime,
-                          @actualArrivalTime, StopState.DONE)
+                          @actualArrivalTime, StopState::DONE)
       else
         t = TrainStop.new(@stationName, @scheduledArrivalTime,
-                          @actualArrivalTime, StopState.TODO)
+                          @actualArrivalTime, StopState::TODO)
       end
       @train.addStop(t)
     end
