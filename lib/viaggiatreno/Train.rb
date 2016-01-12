@@ -77,12 +77,12 @@ class Train
   end
 
   def lastStop
-    if trainStops[0].status.to_s != StopState.DONE
+    if trainStops[0].status.to_s != StopState::DONE
       return @trainStops[0].to_s
     end
     (trainStops.length - 1).times do |i|
-      if trainStops[i].status.to_s == StopState.DONE && \
-          trainStops[i + 1].status.to_s != StopState.DONE
+      if trainStops[i].status.to_s == StopState::DONE && \
+          trainStops[i + 1].status.to_s != StopState::DONE
         return trainStops[i].to_s
       end
     end
