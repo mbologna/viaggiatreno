@@ -3,7 +3,7 @@ require_relative 'train_state.rb'
 require_relative 'train_stop.rb'
 
 class Train
-  attr_accessor :train_number, :trainName, :delay, :status, :lastUpdate, :state
+  attr_accessor :train_number, :train_name, :delay, :status, :last_update, :state
 
   def initialize(train_number)
     @train_number = train_number
@@ -12,17 +12,17 @@ class Train
   end
 
   def update
-    @scraper.updateTrain
+    @scraper.update_train
   end
 
   def update_details
     @train_stops = []
-    @scraper.updateTrainDetails
+    @scraper.update_train_details
   end
 
   def to_s
-    "#{@train_number} #{@trainName}: #{@status} state: #{@state}, \
-    delay: #{@delay}, lastUpdate: #{@lastUpdate} #{@train_stops}"
+    "#{@train_number} #{@train_name}: #{@status} state: #{@state}, \
+    delay: #{@delay}, last_update: #{@last_update} #{@train_stops}"
   end
 
   def add_stop(train_stop)
@@ -35,11 +35,11 @@ class Train
   end
 
   def departing_station
-    train_stops.first.trainStation.to_s
+    train_stops.first.train_station.to_s
   end
 
   def arriving_station
-    train_stops.last.trainStation.to_s
+    train_stops.last.train_station.to_s
   end
 
   def scheduled_departing_time
@@ -60,7 +60,7 @@ class Train
 
   def scheduled_stop_time(station_name)
     train_stops.each do |train_stop|
-      if train_stop.trainStation.to_s == station_name
+      if train_stop.train_station.to_s == station_name
         return train_stop.scheduled_stop_time.to_s
       end
     end
@@ -68,7 +68,7 @@ class Train
 
   def actual_stop_time(station_name)
     train_stops.each do |train_stop|
-      if train_stop.trainStation.to_s == station_name
+      if train_stop.train_station.to_s == station_name
         return train_stop.actual_stop_time.to_s
       end
     end
