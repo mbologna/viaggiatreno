@@ -33,10 +33,8 @@ class Scraper
         @train.delay = 0
       else
         @train.delay = @status.match(RegExpMatchInfo::REGEXP_DELAY_STR)[1].to_i
-        if @status.match(RegExpMatchInfo::REGEXP_DELAY_STR)[2] \
-            != RegExpMatchInfo::STR_DELAY_STR
-          # train is ahead of schedule, delay is negative
-          @train.delay *= -1
+        if @status.match(RegExpMatchInfo::REGEXP_DELAY_STR)[2] != RegExpMatchInfo::STR_DELAY_STR
+          @train.delay *= -1 # train is ahead of schedule, delay is negative
         end
       end
       if @status =~ RegExpMatchInfo::REGEXP_STATE_RUNNING
