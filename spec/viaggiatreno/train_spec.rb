@@ -8,13 +8,37 @@ describe Train do
     end
   end
 
-  describe '#to_s' do
+  describe '#finished_train' do
     it do
       expect(@train.to_s).to eq \
         '20241 REG 20241: Il treno e\' arrivato con 2 minuti di ritardo state'\
         ': ARRIVED,     delay: 2, last_update:  '
     end
   end
+
+  describe '#not_departed_train' do
+	before do
+		VCR.use_cassette('Train train not departed') do
+			@train = Train.new('2572')
+		end
+	end
+		it do
+			expect(@train.to_s).to eq \
+       '2572 REG 2572: Il treno non e\' ancora partito state: NOT DEPARTED,     delay: , last_update:  ' 
+		end
+	end
+
+describe '#running_train' do 
+	before do
+		VCR.use_cassette('Train train running') do
+			@train = Train.new('2566')
+		end
+	end
+	it do
+		expect(@train.to_s).to eq \
+	'2566 REG 2566: Il treno viaggia con 1 minuti di anticipo state: TRAVELING,     delay: -1, last_update: LECCO alle ore 16:58 '
+end
+end
 
   describe '#trainStops' do
     before do
