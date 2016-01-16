@@ -17,28 +17,30 @@ describe Train do
   end
 
   describe '#not_departed_train' do
-	before do
-		VCR.use_cassette('Train train not departed') do
-			@train = Train.new('2572')
-		end
-	end
-		it do
-			expect(@train.to_s).to eq \
-       '2572 REG 2572: Il treno non e\' ancora partito state: NOT DEPARTED,     delay: , last_update:  ' 
-		end
-	end
+    before do
+      VCR.use_cassette('Train train not departed') do
+        @train = Train.new('2572')
+      end
+    end
+    it do
+      expect(@train.to_s).to eq \
+        '2572 REG 2572: Il treno non e\' ancora partito state: NOT DEPARTED'\
+        ',     delay: , last_update:  '
+    end
+  end
 
-describe '#running_train' do 
-	before do
-		VCR.use_cassette('Train train running') do
-			@train = Train.new('2566')
-		end
-	end
-	it do
-		expect(@train.to_s).to eq \
-	'2566 REG 2566: Il treno viaggia con 1 minuti di anticipo state: TRAVELING,     delay: -1, last_update: LECCO alle ore 16:58 '
-end
-end
+  describe '#running_train' do
+    before do
+      VCR.use_cassette('Train train running') do
+        @train = Train.new('2566')
+      end
+    end
+    it do
+      expect(@train.to_s).to eq \
+        '2566 REG 2566: Il treno viaggia con 1 minuti di anticipo state: '\
+        'TRAVELING,     delay: -1, last_update: LECCO alle ore 16:58 '
+    end
+  end
 
   describe '#trainStops' do
     before do
@@ -46,7 +48,6 @@ end
         @train_stops = @train.train_stops
       end
     end
-
     it do
       expect(@train_stops.map(&:to_s)).to eq [
         '[X] DOMODOSSOLA = SCHEDULED: 18:10 EXPECTED: 18:11',
@@ -80,7 +81,6 @@ end
         @departing_station = @train.departing_station
       end
     end
-
     it { expect(@departing_station).to eq 'DOMODOSSOLA' }
   end
 
