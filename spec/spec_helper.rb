@@ -1,5 +1,8 @@
 require 'vcr'
 
+require "codeclimate-test-reporter"
+CodeClimate::TestReporter.start
+
 VCR.configure do |c|
   c.cassette_library_dir = 'spec/vcr_cassettes'
   c.hook_into :webmock

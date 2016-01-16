@@ -12,4 +12,6 @@ notifications:
     - michele.bologna@gmail.com
     - marius.colacioiu@gmail.com
 sudo: false
-
+addons:
+  code_climate:
+    repo_token: 31c466aad9acda9cfe23ab74ca7a9c50a2243f2dd473d972a70c795c2affdab0
