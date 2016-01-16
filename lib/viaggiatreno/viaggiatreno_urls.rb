@@ -1,7 +1,7 @@
 require_relative 'regex_match_info'
 
 class ViaggiatrenoURLs
-  SITE_INFO = 'http://mobile.viaggiatreno.it/vt_pax_internet/mobile/'
+  SITE_INFO = 'http://mobile.viaggiatreno.it/vt_pax_internet/mobile/'.freeze
   SITE_INFO_MAIN =
     SITE_INFO + 'numero?numeroTreno=' +
     RegExpMatchInfo::STR_TRAIN_NUMBER_URL_REPLACE + \

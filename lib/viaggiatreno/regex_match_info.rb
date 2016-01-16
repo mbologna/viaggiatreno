@@ -6,6 +6,6 @@ class RegExpMatchInfo
   REGEXP_DELAY_STR = /con (\d+) minuti di ([anticipo|ritardo]+)/
   REGEXP_NODELAY_STR = /Il treno .* in orario.*/
   REGEXP_STOP_ALREADY_DONE = /giaeffettuate/
-  STR_DELAY_STR = 'ritardo'
-  STR_TRAIN_NUMBER_URL_REPLACE = 'TRAINNUMBER'
+  STR_DELAY_STR = 'ritardo'.freeze
+  STR_TRAIN_NUMBER_URL_REPLACE = 'TRAINNUMBER'.freeze
 end
