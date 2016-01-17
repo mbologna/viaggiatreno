@@ -78,7 +78,7 @@ class Train
     return train_stops.last.to_s if @state == TrainState::ARRIVED
     train_stops.each_with_index do |train_stop, index|
       if train_stop.status == TrainStopState::DONE && \
-         train_stops[index + 1].status == TrainStopState::TODO
+         train_stops[index + 1].status == TrainStopState::TO_BE_DONE
         return train_stop.to_s
       end
     end
