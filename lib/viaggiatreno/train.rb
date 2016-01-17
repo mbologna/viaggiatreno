@@ -75,15 +75,13 @@ class Train
   end
 
   def last_stop
-    return @train_stops[0].to_s if train_stops[0].status.to_s != StopState::DONE
-
-    (train_stops.length - 1).times do |i|
-      if train_stops[i].status.to_s == StopState::DONE && \
-         train_stops[i + 1].status.to_s != StopState::DONE
-        return train_stops[i].to_s
+    return train_stops.last.to_s if @state == TrainState::ARRIVED
+    train_stops.each_with_index do |train_stop, index|
+      if train_stop.status == TrainStopState::DONE && \
+         train_stops[index + 1].status == TrainStopState::TODO
+        return train_stop.to_s
       end
     end
-
-    train_stops[train_stops.length - 1].to_s
+    nil
   end
 end

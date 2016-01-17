@@ -164,7 +164,7 @@ describe Train do
       expect(@train.train_name).to eq 'REG 2657'
       expect(@train.status).to eq 'Il treno non e\' ancora partito'
       expect(@train.last_update).to eq nil
-      expect(@train.last_stop).to eq '[X] MILANO CENTRALE = SCHEDULED: 16:20 ACTUAL: '
+      expect(@train.last_stop).to eq nil
       expect(@train.departing_station).to eq 'MILANO CENTRALE'
       expect(@train.arriving_station).to eq 'MANTOVA'
       expect(@train.scheduled_departing_time).to eq '16:20'
@@ -175,7 +175,7 @@ describe Train do
       expect(@train.actual_stop_time('LODI')).to eq '16:46 [TODO]'
       expect(@train.train_stops.map(&:to_s)).to eq \
         [
-          '[X] MILANO CENTRALE = SCHEDULED: 16:20 ACTUAL: ',
+          '[ ] MILANO CENTRALE = SCHEDULED: 16:20 EXPECTED: ',
           '[ ] MILANO LAMBRATE = SCHEDULED: 16:26 EXPECTED: 16:26',
           '[ ] MILANO ROGOREDO = SCHEDULED: 16:31 EXPECTED: 16:31',
           '[ ] LODI = SCHEDULED: 16:46 EXPECTED: 16:46',

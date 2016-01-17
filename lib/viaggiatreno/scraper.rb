@@ -68,7 +68,8 @@ class Scraper
         @actual_arrival_time = StringUtils.remove_newlines_tabs_and_spaces(
           actual_arrival_time).to_s
       end
-      if x.attributes['class'].to_s =~ RegExpMatchInfo::REGEXP_STOP_ALREADY_DONE
+      if x.attributes['class'].to_s =~ RegExpMatchInfo::REGEXP_STOP_ALREADY_DONE\
+         && @train.state != TrainState::NOT_DEPARTED
         t = TrainStop.new(@station_name, @scheduled_arrival_time,
                           @actual_arrival_time, TrainStopState::DONE)
       else
