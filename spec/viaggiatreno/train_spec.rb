@@ -129,8 +129,8 @@ describe Train do
       expect(@train.actual_departing_time).to eq '14:21'
       expect(@train.scheduled_arriving_time).to eq '16:10'
       expect(@train.actual_arriving_time).to eq '16:11'
-      expect(@train.scheduled_stop_time('PIADENA')).to eq '15:46 [TODO]'
-      expect(@train.actual_stop_time('PIADENA')).to eq '15:47 [TODO]'
+      expect(@train.scheduled_stop_time('PIADENA')).to eq '15:46 [TO_BE_DONE]'
+      expect(@train.actual_stop_time('PIADENA')).to eq '15:47 [TO_BE_DONE]'
       expect(@train.train_stops.map(&:to_s)).to eq \
         [
           '[X] MILANO CENTRALE = SCHEDULED: 14:20 ACTUAL: 14:21',
@@ -171,8 +171,8 @@ describe Train do
       expect(@train.actual_departing_time).to eq ''
       expect(@train.scheduled_arriving_time).to eq '18:10'
       expect(@train.actual_arriving_time).to eq '18:10'
-      expect(@train.scheduled_stop_time('LODI')).to eq '16:46 [TODO]'
-      expect(@train.actual_stop_time('LODI')).to eq '16:46 [TODO]'
+      expect(@train.scheduled_stop_time('LODI')).to eq '16:46 [TO_BE_DONE]'
+      expect(@train.actual_stop_time('LODI')).to eq '16:46 [TO_BE_DONE]'
       expect(@train.train_stops.map(&:to_s)).to eq \
         [
           '[ ] MILANO CENTRALE = SCHEDULED: 16:20 EXPECTED: ',

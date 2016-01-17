@@ -74,7 +74,7 @@ class Scraper
                           @actual_arrival_time, TrainStopState::DONE)
       else
         t = TrainStop.new(@station_name, @scheduled_arrival_time,
-                          @actual_arrival_time, TrainStopState::TODO)
+                          @actual_arrival_time, TrainStopState::TO_BE_DONE)
       end
       @train.add_stop(t)
     end

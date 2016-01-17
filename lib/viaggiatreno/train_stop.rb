@@ -15,7 +15,7 @@ class TrainStop
     if @status == TrainStopState::DONE
       done = 'X'
       actual_or_expected = 'ACTUAL'
-    elsif @status == TrainStopState::TODO
+    elsif @status == TrainStopState::TO_BE_DONE
       done = ' '
       actual_or_expected = 'EXPECTED'
     end
