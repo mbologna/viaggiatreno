@@ -22,7 +22,7 @@ class Train
 
   def to_s
     "#{@train_number} #{@train_name}: #{@status} state: #{@state}, \
-    delay: #{@delay}, last_update: #{@last_update} #{@train_stops}"
+    delay: #{@delay}, last_update: #{@last_update}"
   end
 
   def add_stop(train_stop)
@@ -61,7 +61,7 @@ class Train
   def scheduled_stop_time(station_name)
     train_stops.each do |train_stop|
       if train_stop.train_station.to_s == station_name
-        return train_stop.scheduled_stop_time.to_s
+        return "#{train_stop.scheduled_stop_time} [#{train_stop.status}]"
       end
     end
   end
@@ -69,7 +69,7 @@ class Train
   def actual_stop_time(station_name)
     train_stops.each do |train_stop|
       if train_stop.train_station.to_s == station_name
-        return train_stop.actual_stop_time.to_s
+        return "#{train_stop.actual_stop_time} [#{train_stop.status}]"
       end
     end
   end
