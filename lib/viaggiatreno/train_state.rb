@@ -1,6 +1,6 @@
 class TrainState
   # Train status
-  RUNNING = 'TRAVELING'.freeze
-  FINISHED = 'ARRIVED'.freeze
-  NOT_STARTED = 'NOT DEPARTED'.freeze
+  TRAVELING = 'TRAVELING'.freeze
+  ARRIVED = 'ARRIVED'.freeze
+  NOT_DEPARTED = 'NOT DEPARTED'.freeze
 end

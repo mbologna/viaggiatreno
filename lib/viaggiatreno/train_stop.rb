@@ -1,4 +1,4 @@
-require_relative 'stop_state'
+require_relative 'train_stop_state'
 
 class TrainStop
   attr_accessor :train_station, :scheduled_stop_time, :actual_stop_time, :status
@@ -12,12 +12,15 @@ class TrainStop
 
   def to_s
     retstr = ''
-    if @status == StopState::DONE
-      retstr += '[X] '
-    elsif @status == StopState::TODO
-      retstr += '[ ] '
+    if @status == TrainStopState::DONE
+      done = 'X'
+      actual_or_expected = 'ACTUAL'
+    elsif @status == TrainStopState::TODO
+      done = ' '
+      actual_or_expected = 'EXPECTED'
     end
-    retstr += "#{train_station} = SCHEDULED: #{scheduled_stop_time} EXPECTED: #{actual_stop_time}"
+    retstr += "[#{done}] #{train_station} = SCHEDULED: #{scheduled_stop_time}"\
+              " #{actual_or_expected}: #{actual_stop_time}"
     retstr
   end
 end
