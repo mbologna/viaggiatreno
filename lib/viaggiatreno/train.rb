@@ -59,19 +59,11 @@ class Train
   end
 
   def scheduled_stop_time(station_name)
-    train_stops.each do |train_stop|
-      if train_stop.train_station.to_s == station_name
-        return "#{train_stop.scheduled_stop_time} [#{train_stop.status}]"
-      end
-    end
+    find_stop_time(station_name)['scheduled']
   end
 
   def actual_stop_time(station_name)
-    train_stops.each do |train_stop|
-      if train_stop.train_station.to_s == station_name
-        return "#{train_stop.actual_stop_time} [#{train_stop.status}]"
-      end
-    end
+    find_stop_time(station_name)['actual']
   end
 
   def last_stop
@@ -83,5 +75,19 @@ class Train
       end
     end
     nil
+  end
+
+  private
+
+  def find_stop_time(station_name)
+    train_stops.each do |train_stop|
+      if train_stop.train_station.to_s == station_name
+        return \
+        {
+          'actual' => "#{train_stop.actual_stop_time} [#{train_stop.status}]",
+          'scheduled' => "#{train_stop.scheduled_stop_time} [#{train_stop.status}]"
+        }
+      end
+    end
   end
 end
