@@ -20,24 +20,14 @@ class Scraper
   # fetch and parse basic train information (status, train)name, details)
   def update_train
     doc = Nokogiri::HTML(open(@site_info_main))
-    doc.xpath(XPathMatchInfo::XPATH_STATUS).each do |x|
-      @status = StringUtils.remove_newlines_tabs_and_spaces(x)
-    end
-    doc.xpath(XPathMatchInfo::XPATH_TRAIN_NAME).each do |x|
-      @train_name = x.content
-    end
+    @status = StringUtils.remove_newlines_tabs_and_spaces(
+      doc.xpath(XPathMatchInfo::XPATH_STATUS).first)
+    @train_name = doc.xpath(XPathMatchInfo::XPATH_TRAIN_NAME).first.content
     if @status =~ RegExpMatchInfo::REGEXP_STATE_NOT_DEPARTED
       @train.state = TrainState::NOT_DEPARTED
     elsif @status =~ RegExpMatchInfo::REGEXP_STATE_TRAVELING || \
           RegExpMatchInfo::REGEXP_STATE_ARRIVED
-      if @status =~ RegExpMatchInfo::REGEXP_NODELAY_STR
-        @train.delay = 0
-      else
-        @train.delay = @status.match(RegExpMatchInfo::REGEXP_DELAY_STR)[1].to_i
-        if @status.match(RegExpMatchInfo::REGEXP_DELAY_STR)[2] != RegExpMatchInfo::STR_DELAY_STR
-          @train.delay *= -1 # train is ahead of schedule, delay is negative
-        end
-      end
+      adjust_train_delay(@status, @train)
       if @status =~ RegExpMatchInfo::REGEXP_STATE_TRAVELING
         @train.state = TrainState::TRAVELING
         @train.last_update = @status.match(
@@ -49,6 +39,17 @@ class Scraper
     end
     @train.status = @status
     @train.train_name = @train_name
+  end
+
+  def adjust_train_delay(status, train)
+    if status =~ RegExpMatchInfo::REGEXP_NODELAY_STR
+      train.delay = 0
+    else
+      train.delay = status.match(RegExpMatchInfo::REGEXP_DELAY_STR)[1].to_i
+      if status.match(RegExpMatchInfo::REGEXP_DELAY_STR)[2] != RegExpMatchInfo::STR_DELAY_STR
+        train.delay *= -1 # train is ahead of schedule, delay is negative
+      end
+    end
   end
 
   # fetch and parse train details (departing and arriving station,
