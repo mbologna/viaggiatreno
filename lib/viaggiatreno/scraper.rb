@@ -47,7 +47,6 @@ class Scraper
         @train.state = TrainState::ARRIVED
       end
     end
-
     @train.status = @status
     @train.train_name = @train_name
   end
@@ -57,26 +56,20 @@ class Scraper
   def update_train_details
     doc = Nokogiri::HTML(open(@site_info_details))
     doc.xpath(XPathMatchInfo::XPATH_DETAILS_GENERIC).each do |x|
-      x.xpath(XPathMatchInfo::XPATH_DETAILS_STATION_NAME).each do |station_name|
-        @station_name = station_name.to_s
-      end
-      x.xpath(XPathMatchInfo::XPATH_DETAILS_SCHEDULED_STOP_TIME).each do |scheduled_arrival_time|
-        @scheduled_arrival_time = StringUtils.remove_newlines_tabs_and_spaces(
-          scheduled_arrival_time).to_s
-      end
-      x.xpath(XPathMatchInfo::XPATH_DETAILS_ACTUAL_STOP_TIME).each do |actual_arrival_time|
-        @actual_arrival_time = StringUtils.remove_newlines_tabs_and_spaces(
-          actual_arrival_time).to_s
-      end
-      if x.attributes['class'].to_s =~ RegExpMatchInfo::REGEXP_STOP_ALREADY_DONE\
-         && @train.state != TrainState::NOT_DEPARTED
-        t = TrainStop.new(@station_name, @scheduled_arrival_time,
-                          @actual_arrival_time, TrainStopState::DONE)
-      else
-        t = TrainStop.new(@station_name, @scheduled_arrival_time,
-                          @actual_arrival_time, TrainStopState::TO_BE_DONE)
-      end
-      @train.add_stop(t)
+      @station_name = x.xpath(XPathMatchInfo::XPATH_DETAILS_STATION_NAME).first.to_s
+      @scheduled_arrival_time = StringUtils.remove_newlines_tabs_and_spaces(
+        x.xpath(XPathMatchInfo::XPATH_DETAILS_SCHEDULED_STOP_TIME).first).to_s
+      @actual_arrival_time = StringUtils.remove_newlines_tabs_and_spaces(
+        x.xpath(XPathMatchInfo::XPATH_DETAILS_ACTUAL_STOP_TIME).first).to_s
+      @status = if x.attributes['class'].to_s =~ RegExpMatchInfo::REGEXP_STOP_ALREADY_DONE && \
+                   @train.state != TrainState::NOT_DEPARTED
+                  TrainStopState::DONE
+                else
+                  TrainStopState::TO_BE_DONE
+                end
+      @train.add_stop(TrainStop.new(
+                        @station_name, @scheduled_arrival_time,
+                        @actual_arrival_time, @status))
     end
   end
 end
