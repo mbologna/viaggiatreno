@@ -52,22 +52,37 @@ class Scraper
     end
   end
 
+  def update_train_status(x, train, status)
+    status = if x.attributes['class'].to_s =~ RegExpMatchInfo::REGEXP_STOP_ALREADY_DONE && \
+                train.state != TrainState::NOT_DEPARTED
+               TrainStopState::DONE
+             else
+               TrainStopState::TO_BE_DONE
+             end
+    status
+  end
+
+  def fetch_arrival_time(x)
+    scheduled_arrival_time = StringUtils.remove_newlines_tabs_and_spaces(
+      x.xpath(XPathMatchInfo::XPATH_DETAILS_SCHEDULED_STOP_TIME).first).to_s
+    actual_arrival_time = StringUtils.remove_newlines_tabs_and_spaces(
+      x.xpath(XPathMatchInfo::XPATH_DETAILS_ACTUAL_STOP_TIME).first).to_s
+    {
+      'scheduled_arrival_time' => scheduled_arrival_time,
+      'actual_arrival_time' => actual_arrival_time
+    }
+  end
+
   # fetch and parse train details (departing and arriving station,
   # intermediate stops)
   def update_train_details
     doc = Nokogiri::HTML(open(@site_info_details))
     doc.xpath(XPathMatchInfo::XPATH_DETAILS_GENERIC).each do |x|
       @station_name = x.xpath(XPathMatchInfo::XPATH_DETAILS_STATION_NAME).first.to_s
-      @scheduled_arrival_time = StringUtils.remove_newlines_tabs_and_spaces(
-        x.xpath(XPathMatchInfo::XPATH_DETAILS_SCHEDULED_STOP_TIME).first).to_s
-      @actual_arrival_time = StringUtils.remove_newlines_tabs_and_spaces(
-        x.xpath(XPathMatchInfo::XPATH_DETAILS_ACTUAL_STOP_TIME).first).to_s
-      @status = if x.attributes['class'].to_s =~ RegExpMatchInfo::REGEXP_STOP_ALREADY_DONE && \
-                   @train.state != TrainState::NOT_DEPARTED
-                  TrainStopState::DONE
-                else
-                  TrainStopState::TO_BE_DONE
-                end
+      arrival_time = fetch_arrival_time(x)
+      @scheduled_arrival_time = arrival_time['scheduled_arrival_time']
+      @actual_arrival_time = arrival_time['actual_arrival_time']
+      @status = update_train_status(x, @train, @status)
       @train.add_stop(TrainStop.new(
                         @station_name, @scheduled_arrival_time,
                         @actual_arrival_time, @status))
