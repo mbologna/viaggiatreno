@@ -27,7 +27,7 @@ class Scraper
       @train.state = TrainState::NOT_DEPARTED
     elsif @status =~ RegExpMatchInfo::REGEXP_STATE_TRAVELING || \
           RegExpMatchInfo::REGEXP_STATE_ARRIVED
-      adjust_train_delay(@status, @train)
+      @train.delay = fetch_train_delay(@status)
       if @status =~ RegExpMatchInfo::REGEXP_STATE_TRAVELING
         @train.state = TrainState::TRAVELING
         @train.last_update = @status.match(
@@ -41,15 +41,16 @@ class Scraper
     @train.train_name = @train_name
   end
 
-  def adjust_train_delay(status, train)
+  def fetch_train_delay(status)
     if status =~ RegExpMatchInfo::REGEXP_NODELAY_STR
-      train.delay = 0
+      delay = 0
     else
-      train.delay = status.match(RegExpMatchInfo::REGEXP_DELAY_STR)[1].to_i
+      delay = status.match(RegExpMatchInfo::REGEXP_DELAY_STR)[1].to_i
       if status.match(RegExpMatchInfo::REGEXP_DELAY_STR)[2] != RegExpMatchInfo::STR_DELAY_STR
-        train.delay *= -1 # train is ahead of schedule, delay is negative
+        delay *= -1 # train is ahead of schedule, delay is negative
       end
     end
+    delay
   end
 
   def update_train_status(x, train, status)
