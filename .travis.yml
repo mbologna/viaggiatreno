@@ -1,0 +1,17 @@
+language: ruby
+rvm:
+  - 2.0.0
+  - 2.1.8
+  - 2.2.4
+  - 2.3.0
+  - ruby-head
+script:
+  - 'bundle exec rspec --color --format documentation'
+notifications:
+  recipients:
+    - michele.bologna@gmail.com
+    - marius.colacioiu@gmail.com
+sudo: false
+addons:
+  code_climate:
+    repo_token: 31c466aad9acda9cfe23ab74ca7a9c50a2243f2dd473d972a70c795c2affdab0
