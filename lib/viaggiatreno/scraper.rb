@@ -24,6 +24,7 @@ class Scraper
       doc.xpath(XPathMatchInfo::XPATH_STATUS).first)
     @train.train_name = doc.xpath(XPathMatchInfo::XPATH_TRAIN_NAME).first.content
     update_train_status(@train)
+    @train.delay = fetch_train_delay(@train.status)
   end
 
   def update_train_status(train)
@@ -34,11 +35,11 @@ class Scraper
       train.state = TrainState::ARRIVED
     when train.status =~ RegExpMatchInfo::REGEXP_STATE_TRAVELING
       train.state = TrainState::TRAVELING
-      train.last_update = train.status.match(
-        RegExpMatchInfo::REGEXP_STATE_TRAVELING)[3].strip
-      train.status = train.status.match(RegExpMatchInfo::REGEXP_STATE_TRAVELING)[1].rstrip
+      regex_match = train.status.match(
+        RegExpMatchInfo::REGEXP_STATE_TRAVELING)
+      train.last_update = regex_match[3].strip
+      train.status = regex_match[1].rstrip
     end
-    train.delay = fetch_train_delay(@train.status)
   end
 
   def fetch_train_delay(status)
