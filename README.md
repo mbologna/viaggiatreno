@@ -1,4 +1,4 @@
-# Viaggiatreno 
+# Viaggiatreno
 
 [![Build Status](https://travis-ci.org/mbologna/viaggiatreno.svg)](https://travis-ci.org/mbologna/viaggiatreno)
 [![Code Climate](https://codeclimate.com/repos/569a5314b23bff7a6c011fb0/badges/7a1d250d86b806acee6c/gpa.svg)](https://codeclimate.com/repos/569a5314b23bff7a6c011fb0/feed)
