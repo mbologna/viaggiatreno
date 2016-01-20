@@ -1,5 +1,5 @@
 require 'viaggiatreno/version'
-require 'viaggiatreno/Train'
+require 'viaggiatreno/train'
 
 module Viaggiatreno
 end
