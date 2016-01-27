@@ -50,6 +50,22 @@ class Train
     train_stops.last.scheduled_stop_time.to_s
   end
 
+  def scheduled_departing_rail
+    train_stops.first.scheduled_rail
+  end
+
+  def actual_departing_rail
+    train_stops.first.actual_rail
+  end
+
+  def scheduled_arriving_rail
+    train_stops.last.scheduled_rail
+  end
+
+  def actual_arriving_rail
+    train_stops.last.actual_rail
+  end
+
   def actual_departing_time
     train_stops.first.actual_stop_time.to_s
   end
