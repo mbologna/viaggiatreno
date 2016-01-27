@@ -1,12 +1,15 @@
 require_relative 'train_stop_state'
 
 class TrainStop
-  attr_accessor :train_station, :scheduled_stop_time, :actual_stop_time, :status
+  attr_accessor :train_station, :scheduled_stop_time, :actual_stop_time,
+                :scheduled_rail, :actual_rail, :status
 
-  def initialize(train_station, scheduled_stop_time, actual_stop_time, status)
+  def initialize(train_station, stop_time, rail, status)
     @train_station = train_station
-    @scheduled_stop_time = scheduled_stop_time
-    @actual_stop_time = actual_stop_time
+    @scheduled_stop_time = stop_time['scheduled_arrival_time']
+    @actual_stop_time = stop_time['actual_arrival_time']
+    @scheduled_rail = rail['scheduled_rail']
+    @actual_rail = rail['actual_rail']
     @status = status
   end
 
