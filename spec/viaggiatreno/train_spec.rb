@@ -27,6 +27,10 @@ describe Train do
       expect(@train.actual_departing_time).to eq '06:20'
       expect(@train.scheduled_arriving_time).to eq '08:52'
       expect(@train.actual_arriving_time).to eq '08:50'
+      expect(@train.scheduled_departing_rail).to eq nil
+      expect(@train.actual_departing_rail).to eq nil
+      expect(@train.scheduled_arriving_rail).to eq '1'
+      expect(@train.actual_arriving_rail).to eq nil
       expect(@train.scheduled_stop_time('COLICO')).to eq '07:47 [DONE]'
       expect(@train.actual_stop_time('COLICO')).to eq '07:49 [DONE]'
       expect(@train.train_stops.map(&:to_s)).to eq \
@@ -69,6 +73,10 @@ describe Train do
       expect(@train.actual_departing_time).to eq '08:27'
       expect(@train.scheduled_arriving_time).to eq '09:48'
       expect(@train.actual_arriving_time).to eq '09:48'
+      expect(@train.scheduled_departing_rail).to eq nil
+      expect(@train.actual_departing_rail).to eq nil
+      expect(@train.scheduled_arriving_rail).to eq '6'
+      expect(@train.actual_arriving_rail).to eq nil
       expect(@train.scheduled_stop_time('TORTONA')).to eq '09:27 [DONE]'
       expect(@train.actual_stop_time('TORTONA')).to eq '09:27 [DONE]'
     end
@@ -99,6 +107,10 @@ describe Train do
       expect(@train.actual_departing_time).to eq '18:29'
       expect(@train.scheduled_arriving_time).to eq '20:20'
       expect(@train.actual_arriving_time).to eq '20:23'
+      expect(@train.scheduled_departing_rail).to eq nil
+      expect(@train.actual_departing_rail).to eq nil
+      expect(@train.scheduled_arriving_rail).to eq '7'
+      expect(@train.actual_arriving_rail).to eq '7'
       expect(@train.scheduled_stop_time('DESENZANO')).to eq '19:50 [DONE]'
       expect(@train.actual_stop_time('DESENZANO')).to eq '19:57 [DONE]'
     end
@@ -129,6 +141,10 @@ describe Train do
       expect(@train.actual_departing_time).to eq '14:21'
       expect(@train.scheduled_arriving_time).to eq '16:10'
       expect(@train.actual_arriving_time).to eq '16:11'
+      expect(@train.scheduled_departing_rail).to eq nil
+      expect(@train.actual_departing_rail).to eq nil
+      expect(@train.scheduled_arriving_rail).to eq '4'
+      expect(@train.actual_arriving_rail).to eq nil
       expect(@train.scheduled_stop_time('PIADENA')).to eq '15:46 [TO_BE_DONE]'
       expect(@train.actual_stop_time('PIADENA')).to eq '15:47 [TO_BE_DONE]'
       expect(@train.train_stops.map(&:to_s)).to eq \
@@ -171,6 +187,10 @@ describe Train do
       expect(@train.actual_departing_time).to eq ''
       expect(@train.scheduled_arriving_time).to eq '18:10'
       expect(@train.actual_arriving_time).to eq '18:10'
+      expect(@train.scheduled_departing_rail).to eq nil
+      expect(@train.actual_departing_rail).to eq nil
+      expect(@train.scheduled_arriving_rail).to eq '4'
+      expect(@train.actual_arriving_rail).to eq nil
       expect(@train.scheduled_stop_time('LODI')).to eq '16:46 [TO_BE_DONE]'
       expect(@train.actual_stop_time('LODI')).to eq '16:46 [TO_BE_DONE]'
       expect(@train.train_stops.map(&:to_s)).to eq \

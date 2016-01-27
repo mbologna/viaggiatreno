@@ -62,12 +62,10 @@ class Scraper
     doc.xpath(XPathMatchInfo::XPATH_DETAILS_GENERIC).each do |x|
       @station_name = x.xpath(XPathMatchInfo::XPATH_DETAILS_STATION_NAME).first.to_s
       arrival_time = fetch_trainstop_arrival_time(x)
-      @scheduled_arrival_time = arrival_time['scheduled_arrival_time']
-      @actual_arrival_time = arrival_time['actual_arrival_time']
+      rail = fetch_trainstop_rail(x)
       @status = update_trainstop_status(x, @train, @status)
       @train.add_stop(TrainStop.new(
-                        @station_name, @scheduled_arrival_time,
-                        @actual_arrival_time, @status))
+                        @station_name, arrival_time, rail, @status))
     end
   end
 
@@ -79,6 +77,19 @@ class Scraper
                TrainStopState::TO_BE_DONE
              end
     status
+  end
+
+  def fetch_trainstop_rail(xpath)
+    scheduled_rail = StringUtils.remove_newlines_tabs_and_spaces(xpath).match(
+      RegExpMatchInfo::REGEXP_SCHEDULED_TRACK)[1]
+    scheduled_rail = nil if scheduled_rail == '--'
+    actual_rail = StringUtils.remove_newlines_tabs_and_spaces(xpath).match(
+      RegExpMatchInfo::REGEXP_ACTUAL_TRACK)[1]
+    actual_rail = nil if actual_rail == '--'
+    {
+      'scheduled_rail' => scheduled_rail,
+      'actual_rail' => actual_rail
+    }
   end
 
   def fetch_trainstop_arrival_time(xpath)
