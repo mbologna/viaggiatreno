@@ -19,10 +19,10 @@ class Scraper
 
   # fetch and parse basic train information (status, train)name, details)
   def update_train
-    doc = Nokogiri::HTML(open(@site_info_main))
+    @doc = Nokogiri::HTML(open(@site_info_main))
     @train.status = StringUtils.remove_newlines_tabs_and_spaces(
-      doc.xpath(XPathMatchInfo::XPATH_STATUS).first)
-    @train.train_name = doc.xpath(XPathMatchInfo::XPATH_TRAIN_NAME).first.content
+      @doc.xpath(XPathMatchInfo::XPATH_STATUS).first)
+    @train.train_name = @doc.xpath(XPathMatchInfo::XPATH_TRAIN_NAME).first.content
     update_train_status(@train)
     @train.delay = fetch_train_delay(@train.status)
   end
@@ -59,10 +59,10 @@ class Scraper
   # intermediate stops)
   def update_train_details
     doc = Nokogiri::HTML(open(@site_info_details))
-    doc.xpath(XPathMatchInfo::XPATH_DETAILS_GENERIC).each do |x|
+    doc.xpath(XPathMatchInfo::XPATH_DETAILS_GENERIC).each_with_index do |x, index|
       @station_name = x.xpath(XPathMatchInfo::XPATH_DETAILS_STATION_NAME).first.to_s
       arrival_time = fetch_trainstop_arrival_time(x)
-      rail = fetch_trainstop_rail(x)
+      rail = fetch_trainstop_rail(x, index)
       @status = update_trainstop_status(x, @train, @status)
       @train.add_stop(TrainStop.new(
                         @station_name, arrival_time, rail, @status))
@@ -79,12 +79,20 @@ class Scraper
     status
   end
 
-  def fetch_trainstop_rail(xpath)
-    scheduled_rail = StringUtils.remove_newlines_tabs_and_spaces(xpath).match(
-      RegExpMatchInfo::REGEXP_SCHEDULED_TRACK)[1]
+  def fetch_trainstop_rail(xpath, departing_station)
+    if departing_station != 0
+      scheduled_rail = StringUtils.remove_newlines_tabs_and_spaces(xpath).match(
+        RegExpMatchInfo::REGEXP_SCHEDULED_RAIL)[1]
+      actual_rail = StringUtils.remove_newlines_tabs_and_spaces(xpath).match(
+        RegExpMatchInfo::REGEXP_ACTUAL_RAIL)[1]
+    else
+      rail = @doc.xpath(XPathMatchInfo::XPATH_TRAIN_GENERIC_INFO)
+      scheduled_rail = StringUtils.remove_newlines_tabs_and_spaces(
+        rail.first).match(RegExpMatchInfo::REGEXP_SCHEDULED_RAIL)[1]
+      actual_rail = StringUtils.remove_newlines_tabs_and_spaces(
+        rail.first).match(RegExpMatchInfo::REGEXP_ACTUAL_RAIL)[1]
+    end
     scheduled_rail = nil if scheduled_rail == '--'
-    actual_rail = StringUtils.remove_newlines_tabs_and_spaces(xpath).match(
-      RegExpMatchInfo::REGEXP_ACTUAL_TRACK)[1]
     actual_rail = nil if actual_rail == '--'
     {
       'scheduled_rail' => scheduled_rail,
