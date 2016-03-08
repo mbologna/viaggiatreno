@@ -80,24 +80,25 @@ class Scraper
   end
 
   def fetch_trainstop_rail(xpath, departing_station)
-    if departing_station != 0
-      scheduled_rail = StringUtils.remove_newlines_tabs_and_spaces(xpath).match(
-        RegExpMatchInfo::REGEXP_SCHEDULED_RAIL)[1]
-      actual_rail = StringUtils.remove_newlines_tabs_and_spaces(xpath).match(
-        RegExpMatchInfo::REGEXP_ACTUAL_RAIL)[1]
-    else
-      rail = @doc.xpath(XPathMatchInfo::XPATH_TRAIN_GENERIC_INFO)
-      scheduled_rail = StringUtils.remove_newlines_tabs_and_spaces(
-        rail.first).match(RegExpMatchInfo::REGEXP_SCHEDULED_RAIL)[1]
-      actual_rail = StringUtils.remove_newlines_tabs_and_spaces(
-        rail.first).match(RegExpMatchInfo::REGEXP_ACTUAL_RAIL)[1]
+    if departing_station == 0
+      xpath = @doc.xpath(XPathMatchInfo::XPATH_TRAIN_GENERIC_INFO)
+      xpath = xpath.first
     end
+    scheduled_rail, actual_rail = fetch_rail(xpath)
     scheduled_rail = nil if scheduled_rail == '--'
     actual_rail = nil if actual_rail == '--'
     {
       'scheduled_rail' => scheduled_rail,
       'actual_rail' => actual_rail
     }
+  end
+
+  def fetch_rail(xpath)
+    scheduled_rail = StringUtils.remove_newlines_tabs_and_spaces(
+      xpath).match(RegExpMatchInfo::REGEXP_SCHEDULED_RAIL)[1]
+    actual_rail = StringUtils.remove_newlines_tabs_and_spaces(
+      xpath).match(RegExpMatchInfo::REGEXP_ACTUAL_RAIL)[1]
+    [scheduled_rail, actual_rail]
   end
 
   def fetch_trainstop_arrival_time(xpath)
