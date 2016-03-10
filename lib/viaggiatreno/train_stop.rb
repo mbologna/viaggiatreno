@@ -6,10 +6,8 @@ class TrainStop
 
   def initialize(train_station, stop_time, rail, status)
     @train_station = train_station
-    @scheduled_stop_time = stop_time['scheduled_arrival_time']
-    @actual_stop_time = stop_time['actual_arrival_time']
-    @scheduled_rail = rail['scheduled_rail']
-    @actual_rail = rail['actual_rail']
+    @scheduled_stop_time, @actual_stop_time = stop_time
+    @scheduled_rail, @actual_rail = rail
     @status = status
   end
 

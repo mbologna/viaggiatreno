@@ -87,10 +87,7 @@ class Scraper
     scheduled_rail, actual_rail = fetch_rail(xpath)
     scheduled_rail = nil if scheduled_rail == '--'
     actual_rail = nil if actual_rail == '--'
-    {
-      'scheduled_rail' => scheduled_rail,
-      'actual_rail' => actual_rail
-    }
+    [scheduled_rail, actual_rail]
   end
 
   def fetch_rail(xpath)
@@ -106,9 +103,6 @@ class Scraper
       xpath.xpath(XPathMatchInfo::XPATH_DETAILS_SCHEDULED_STOP_TIME).first).to_s
     actual_arrival_time = StringUtils.remove_newlines_tabs_and_spaces(
       xpath.xpath(XPathMatchInfo::XPATH_DETAILS_ACTUAL_STOP_TIME).first).to_s
-    {
-      'scheduled_arrival_time' => scheduled_arrival_time,
-      'actual_arrival_time' => actual_arrival_time
-    }
+    [scheduled_arrival_time, actual_arrival_time]
   end
 end
