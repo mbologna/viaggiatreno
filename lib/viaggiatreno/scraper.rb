@@ -25,6 +25,7 @@ class Scraper
     @train.train_name = @doc.xpath(XPathMatchInfo::XPATH_TRAIN_NAME).first.content
     update_train_status(@train)
     @train.delay = fetch_train_delay(@train.status)
+    return nil
   end
 
   def update_train_status(train)
