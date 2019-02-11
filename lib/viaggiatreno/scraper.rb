@@ -54,8 +54,11 @@ class Scraper
     if status =~ RegExpMatchInfo::REGEXP_NODELAY_STR
       delay = 0
     else
-      delay = status.match(RegExpMatchInfo::REGEXP_DELAY_STR)[1].to_i
-      if status.match(RegExpMatchInfo::REGEXP_DELAY_STR)[2] != RegExpMatchInfo::STR_DELAY_STR
+      delay = status.match(
+        RegExpMatchInfo::REGEXP_DELAY_STR
+      )[1].to_i
+      if status.match(RegExpMatchInfo::REGEXP_DELAY_STR)[2] !=
+         RegExpMatchInfo::STR_DELAY_STR
         delay *= -1 # train is ahead of schedule, delay is negative
       end
     end
@@ -65,19 +68,23 @@ class Scraper
   # fetch and parse train details (departing and arriving station,
   # intermediate stops)
   def update_train_details
-    doc.xpath(XPathMatchInfo::XPATH_DETAILS_GENERIC).each_with_index do |x, index|
-      @station_name = x.xpath(XPathMatchInfo::XPATH_DETAILS_STATION_NAME).first.to_s
-      arrival_time = fetch_trainstop_arrival_time(x)
-      rail = fetch_trainstop_rail(x, index)
-      @status = update_trainstop_status(x, @train, @status)
-      @train.add_stop(TrainStop.new(
-                        @station_name, arrival_time, rail, @status))
     doc = Nokogiri::HTML(URI.parse(@site_info_details).open)
+    doc.xpath(XPathMatchInfo::XPATH_DETAILS_GENERIC)
+       .each_with_index do |xml, index|
+      @station_name = xml.xpath(XPathMatchInfo::XPATH_DETAILS_STATION_NAME)
+                         .first.to_s
+      arrival_time = fetch_trainstop_arrival_time(xml)
+      rail = fetch_trainstop_rail(xml, index)
+      @status = update_trainstop_status(xml, @train)
+      @train.add_stop(
+        TrainStop.new(@station_name, arrival_time, rail, @status)
+      )
     end
   end
 
-  def update_trainstop_status(x, train, status)
-    status = if x.attributes['class'].to_s =~ RegExpMatchInfo::REGEXP_STOP_ALREADY_DONE && \
+  def update_trainstop_status(xml, train)
+    status = if xml.attributes['class'].to_s =~
+                RegExpMatchInfo::REGEXP_STOP_ALREADY_DONE && \
                 train.state != TrainState::NOT_DEPARTED
                TrainStopState::DONE
              else
