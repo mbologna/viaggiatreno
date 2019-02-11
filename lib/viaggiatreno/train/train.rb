@@ -1,6 +1,5 @@
-require_relative 'scraper.rb'
-require_relative 'train_state.rb'
-require_relative 'train_stop.rb'
+require_relative '../scrape/scraper'
+require_relative 'train'
 
 # Class to represent a train with its details
 class Train
