@@ -22,7 +22,7 @@ class Scraper
 
   # fetch and parse basic train information (status, train_name, details)
   def update_train
-    @doc = Nokogiri::HTML(open(@site_info_main))
+    @doc = Nokogiri::HTML(URI.parse(@site_info_main).open)
     @train.status = StringUtils.remove_newlines_tabs_and_spaces(
       @doc.xpath(XPathMatchInfo::XPATH_STATUS).first
     )
@@ -64,7 +64,6 @@ class Scraper
   # fetch and parse train details (departing and arriving station,
   # intermediate stops)
   def update_train_details
-    doc = Nokogiri::HTML(open(@site_info_details))
     doc.xpath(XPathMatchInfo::XPATH_DETAILS_GENERIC).each_with_index do |x, index|
       @station_name = x.xpath(XPathMatchInfo::XPATH_DETAILS_STATION_NAME).first.to_s
       arrival_time = fetch_trainstop_arrival_time(x)
@@ -72,6 +71,7 @@ class Scraper
       @status = update_trainstop_status(x, @train, @status)
       @train.add_stop(TrainStop.new(
                         @station_name, arrival_time, rail, @status))
+    doc = Nokogiri::HTML(URI.parse(@site_info_details).open)
     end
   end
 
