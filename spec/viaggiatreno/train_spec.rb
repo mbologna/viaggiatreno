@@ -18,9 +18,11 @@ describe Train do
       expect(@train.delay).to eq(-2)
       expect(@train.train_number).to eq '2550'
       expect(@train.train_name).to eq 'REG 2550'
-      expect(@train.status).to eq 'Il treno e\' arrivato con 2 minuti di anticipo'
+      expect(@train.status).to eq \
+        'Il treno e\' arrivato con 2 minuti di anticipo'
       expect(@train.last_update).to eq nil
-      expect(@train.last_stop).to eq '[X] TIRANO = SCHEDULED: 08:52 ACTUAL: 08:50'
+      expect(@train.last_stop).to eq \
+        '[X] TIRANO = SCHEDULED: 08:52 ACTUAL: 08:50'
       expect(@train.departing_station).to eq 'MILANO CENTRALE'
       expect(@train.arriving_station).to eq 'TIRANO'
       expect(@train.scheduled_departing_time).to eq '06:20'
@@ -59,14 +61,16 @@ describe Train do
 
     it do
       expect(@train.to_s).to eq \
-        '3961 REG 3961: Il treno e\' arrivato in orario state: ARRIVED,     delay: 0, last_update: '
+        '3961 REG 3961: Il treno e\' arrivato in orario state: ARRIVED'\
+        ',     delay: 0, last_update: '
       expect(@train.state).to eq TrainState::ARRIVED
       expect(@train.delay).to eq 0
       expect(@train.train_number).to eq '3961'
       expect(@train.train_name).to eq 'REG 3961'
       expect(@train.status).to eq 'Il treno e\' arrivato in orario'
       expect(@train.last_update).to eq nil
-      expect(@train.last_stop).to eq '[X] ALESSANDRIA = SCHEDULED: 09:48 ACTUAL: 09:48'
+      expect(@train.last_stop).to eq \
+        '[X] ALESSANDRIA = SCHEDULED: 09:48 ACTUAL: 09:48'
       expect(@train.departing_station).to eq 'MILANO CENTRALE'
       expect(@train.arriving_station).to eq 'ALESSANDRIA'
       expect(@train.scheduled_departing_time).to eq '08:25'
@@ -98,9 +102,11 @@ describe Train do
       expect(@train.delay).to eq 3
       expect(@train.train_number).to eq '2109'
       expect(@train.train_name).to eq 'REG 2109'
-      expect(@train.status).to eq 'Il treno e\' arrivato con 3 minuti di ritardo'
+      expect(@train.status).to eq \
+        'Il treno e\' arrivato con 3 minuti di ritardo'
       expect(@train.last_update).to eq nil
-      expect(@train.last_stop).to eq '[X] VERONA PORTA NUOVA = SCHEDULED: 20:20 ACTUAL: 20:23'
+      expect(@train.last_stop).to eq \
+        '[X] VERONA PORTA NUOVA = SCHEDULED: 20:20 ACTUAL: 20:23'
       expect(@train.departing_station).to eq 'MILANO CENTRALE'
       expect(@train.arriving_station).to eq 'VERONA PORTA NUOVA'
       expect(@train.scheduled_departing_time).to eq '18:25'
@@ -134,7 +140,8 @@ describe Train do
       expect(@train.train_name).to eq 'REG 2655'
       expect(@train.status).to eq 'Il treno viaggia con 1 minuti di ritardo'
       expect(@train.last_update).to eq 'MILANO LAMBRATE alle ore 14:28'
-      expect(@train.last_stop).to eq '[X] MILANO LAMBRATE = SCHEDULED: 14:26 ACTUAL: 14:25'
+      expect(@train.last_stop).to eq \
+        '[X] MILANO LAMBRATE = SCHEDULED: 14:26 ACTUAL: 14:25'
       expect(@train.departing_station).to eq 'MILANO CENTRALE'
       expect(@train.arriving_station).to eq 'MANTOVA'
       expect(@train.scheduled_departing_time).to eq '14:20'
