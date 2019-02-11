@@ -1,4 +1,4 @@
-require_relative 'regex_match_info'
+require_relative '../regex/regex_match_info'
 
 class ViaggiatrenoURLs
   SITE_INFO = 'http://mobile.viaggiatreno.it/vt_pax_internet/mobile/'.freeze

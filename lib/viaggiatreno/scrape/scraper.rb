@@ -1,11 +1,11 @@
 require 'open-uri'
 require 'nokogiri'
-require_relative 'train_stop'
-require_relative 'train_state'
-require_relative 'string_utils'
-require_relative 'regex_match_info'
-require_relative 'train_stop_state'
-require_relative 'xpath_match_info'
+require_relative '../train/train_stop'
+require_relative '../train/train_state'
+require_relative '../train/train_stop_state'
+require_relative '../utils/string_utils'
+require_relative '../regex/regex_match_info'
+require_relative '../xpath/xpath_match_info'
 require_relative 'viaggiatreno_urls'
 
 # Class to scrape data from viaggiatreno website
