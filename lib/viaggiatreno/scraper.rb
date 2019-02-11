@@ -50,6 +50,7 @@ class Scraper
 
   def fetch_train_delay(status)
     return nil if @train.state == TrainState::NOT_DEPARTED
+
     if status =~ RegExpMatchInfo::REGEXP_NODELAY_STR
       delay = 0
     else
