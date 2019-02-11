@@ -2,6 +2,7 @@ require_relative 'scraper.rb'
 require_relative 'train_state.rb'
 require_relative 'train_stop.rb'
 
+# Class to represent a train with its details
 class Train
   attr_accessor :train_number, :train_name, :delay, :status, :last_update, :state
 

@@ -8,6 +8,7 @@ require_relative 'train_stop_state'
 require_relative 'xpath_match_info'
 require_relative 'viaggiatreno_urls'
 
+# Class to scrape data from viaggiatreno website
 class Scraper
   def initialize(train_number, train)
     @site_info_main = ViaggiatrenoURLs::SITE_INFO_MAIN.gsub(
@@ -17,7 +18,7 @@ class Scraper
     @train = train
   end
 
-  # fetch and parse basic train information (status, train)name, details)
+  # fetch and parse basic train information (status, train_name, details)
   def update_train
     @doc = Nokogiri::HTML(open(@site_info_main))
     @train.status = StringUtils.remove_newlines_tabs_and_spaces(
