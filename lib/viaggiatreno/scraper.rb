@@ -34,15 +34,15 @@ class Scraper
   end
 
   def update_train_status(train)
-    case
-    when train.status =~ RegExpMatchInfo::REGEXP_STATE_NOT_DEPARTED
+    if train.status =~ RegExpMatchInfo::REGEXP_STATE_NOT_DEPARTED
       train.state = TrainState::NOT_DEPARTED
-    when train.status =~ RegExpMatchInfo::REGEXP_STATE_ARRIVED
+    elsif train.status =~ RegExpMatchInfo::REGEXP_STATE_ARRIVED
       train.state = TrainState::ARRIVED
-    when train.status =~ RegExpMatchInfo::REGEXP_STATE_TRAVELING
+    elsif train.status =~ RegExpMatchInfo::REGEXP_STATE_TRAVELING
       train.state = TrainState::TRAVELING
       regex_match = train.status.match(
-        RegExpMatchInfo::REGEXP_STATE_TRAVELING)
+        RegExpMatchInfo::REGEXP_STATE_TRAVELING
+      )
       train.last_update = regex_match[3].strip
       train.status = regex_match[1].rstrip
     end
