@@ -94,7 +94,7 @@ class Scraper
   end
 
   def fetch_trainstop_rail(xpath, departing_station)
-    if departing_station == 0
+    if departing_station.zero?
       xpath = @doc.xpath(XPathMatchInfo::XPATH_TRAIN_GENERIC_INFO)
       xpath = xpath.first
     end
