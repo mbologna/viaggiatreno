@@ -12,9 +12,11 @@ require_relative 'viaggiatreno_urls'
 class Scraper
   def initialize(train_number, train)
     @site_info_main = ViaggiatrenoURLs::SITE_INFO_MAIN.gsub(
-      RegExpMatchInfo::STR_TRAIN_NUMBER_URL_REPLACE, train_number)
+      RegExpMatchInfo::STR_TRAIN_NUMBER_URL_REPLACE, train_number
+    )
     @site_info_details = ViaggiatrenoURLs::SITE_INFO_DETAILS.gsub(
-      RegExpMatchInfo::STR_TRAIN_NUMBER_URL_REPLACE, train_number)
+      RegExpMatchInfo::STR_TRAIN_NUMBER_URL_REPLACE, train_number
+    )
     @train = train
   end
 
@@ -22,8 +24,10 @@ class Scraper
   def update_train
     @doc = Nokogiri::HTML(open(@site_info_main))
     @train.status = StringUtils.remove_newlines_tabs_and_spaces(
-      @doc.xpath(XPathMatchInfo::XPATH_STATUS).first)
-    @train.train_name = @doc.xpath(XPathMatchInfo::XPATH_TRAIN_NAME).first.content
+      @doc.xpath(XPathMatchInfo::XPATH_STATUS).first
+    )
+    @train.train_name = @doc.xpath(XPathMatchInfo::XPATH_TRAIN_NAME)
+                            .first.content
     update_train_status(@train)
     @train.delay = fetch_train_delay(@train.status)
     return nil
@@ -93,18 +97,24 @@ class Scraper
   end
 
   def fetch_rail(xpath)
-    scheduled_rail = StringUtils.remove_newlines_tabs_and_spaces(
-      xpath).match(RegExpMatchInfo::REGEXP_SCHEDULED_RAIL)[1]
-    actual_rail = StringUtils.remove_newlines_tabs_and_spaces(
-      xpath).match(RegExpMatchInfo::REGEXP_ACTUAL_RAIL)[1]
+    scheduled_rail = StringUtils.remove_newlines_tabs_and_spaces(xpath)
+                                .match(
+                                  RegExpMatchInfo::REGEXP_SCHEDULED_RAIL
+                                )[1]
+    actual_rail = StringUtils.remove_newlines_tabs_and_spaces(xpath)
+                             .match(
+                               RegExpMatchInfo::REGEXP_ACTUAL_RAIL
+                             )[1]
     [scheduled_rail, actual_rail]
   end
 
   def fetch_trainstop_arrival_time(xpath)
     scheduled_arrival_time = StringUtils.remove_newlines_tabs_and_spaces(
-      xpath.xpath(XPathMatchInfo::XPATH_DETAILS_SCHEDULED_STOP_TIME).first).to_s
+      xpath.xpath(XPathMatchInfo::XPATH_DETAILS_SCHEDULED_STOP_TIME).first
+    ).to_s
     actual_arrival_time = StringUtils.remove_newlines_tabs_and_spaces(
-      xpath.xpath(XPathMatchInfo::XPATH_DETAILS_ACTUAL_STOP_TIME).first).to_s
+      xpath.xpath(XPathMatchInfo::XPATH_DETAILS_ACTUAL_STOP_TIME).first
+    ).to_s
     [scheduled_arrival_time, actual_arrival_time]
   end
 end
