@@ -30,7 +30,7 @@ class Scraper
                             .first.content
     update_train_status(@train)
     @train.delay = fetch_train_delay(@train.status)
-    return nil
+    nil
   end
 
   def update_train_status(train)
