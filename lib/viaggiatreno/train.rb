@@ -4,7 +4,8 @@ require_relative 'train_stop.rb'
 
 # Class to represent a train with its details
 class Train
-  attr_accessor :train_number, :train_name, :delay, :status, :last_update, :state
+  attr_accessor :train_number, :train_name, :delay, :status, :last_update,
+                :state
 
   def initialize(train_number)
     @train_number = train_number
@@ -103,7 +104,8 @@ class Train
         return \
         {
           'actual' => "#{train_stop.actual_stop_time} [#{train_stop.status}]",
-          'scheduled' => "#{train_stop.scheduled_stop_time} [#{train_stop.status}]"
+          'scheduled' =>
+            "#{train_stop.scheduled_stop_time} [#{train_stop.status}]"
         }
       end
     end
