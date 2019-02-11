@@ -1,5 +1,6 @@
 require_relative 'train_stop_state'
 
+# Represent a stop in the journey of the train
 class TrainStop
   attr_accessor :train_station, :scheduled_stop_time, :actual_stop_time,
                 :scheduled_rail, :actual_rail, :status
