@@ -1,5 +1,4 @@
-require_relative '../scrape/scraper'
-require_relative 'train'
+require 'viaggiatreno/utils/scrape/scraper'
 
 # Class to represent a train with its details
 class Train

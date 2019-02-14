@@ -1,6 +1,5 @@
 require 'viaggiatreno/version'
-require 'viaggiatreno/model/train'
-require 'viaggiatreno/model/station'
+require 'viaggiatreno/model/train/train'
 
 # Entry class for this gem
 module Viaggiatreno
