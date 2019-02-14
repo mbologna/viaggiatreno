@@ -1,19 +1,20 @@
-require 'open-uri'
+require 'mechanize'
 require 'nokogiri'
+require 'open-uri'
 
-require 'viaggiatreno/model/train/train_state'
-require 'viaggiatreno/model/station/train_stop'
-require 'viaggiatreno/model/station/train_stop_state'
-require 'viaggiatreno/utils/string/string_utils'
-require 'viaggiatreno/utils/regex/regex_match_info'
-require 'viaggiatreno/utils/xpath/xpath_match_info'
 require 'viaggiatreno/utils/scrape/viaggiatreno_urls'
+require 'viaggiatreno/utils/string/string_utils'
+require 'viaggiatreno/utils/xpath/xpath_match_info'
+require 'viaggiatreno/model/train/train_state'
+require 'viaggiatreno/model/station/train_stop_state'
+require 'viaggiatreno/model/station/train_stop'
 
 # Class to scrape data from viaggiatreno website
-class Scraper
+class TrainScraper
   def initialize(train_number, train)
-    @site_info_main = ViaggiatrenoURLs.getTrainInfoURL train_number
-    @site_info_details = ViaggiatrenoURLs.getTrainInfoDetailsURL train_number
+    @site_info_main = ViaggiatrenoURLs.get_train_info_url train_number
+    @site_info_details =
+      ViaggiatrenoURLs.get_train_info_details_url train_number
     @train = train
   end
 

@@ -7,7 +7,7 @@ class Train
 
   def initialize(train_number)
     @train_number = train_number
-    @scraper = Scraper.new(train_number.to_s, self)
+    @scraper = TrainScraper.new(train_number.to_s, self)
     update
   end
 
