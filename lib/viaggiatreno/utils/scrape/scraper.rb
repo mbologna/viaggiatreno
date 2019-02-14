@@ -11,10 +11,10 @@ require_relative 'viaggiatreno_urls'
 # Class to scrape data from viaggiatreno website
 class Scraper
   def initialize(train_number, train)
-    @site_info_main = ViaggiatrenoURLs::SITE_INFO_MAIN.gsub(
+    @site_info_main = ViaggiatrenoURLs::SITE_TRAIN_INFO.gsub(
       RegExpMatchInfo::STR_TRAIN_NUMBER_URL_REPLACE, train_number
     )
-    @site_info_details = ViaggiatrenoURLs::SITE_INFO_DETAILS.gsub(
+    @site_info_details = ViaggiatrenoURLs::SITE_TRAIN_INFO_DETAILS.gsub(
       RegExpMatchInfo::STR_TRAIN_NUMBER_URL_REPLACE, train_number
     )
     @train = train
