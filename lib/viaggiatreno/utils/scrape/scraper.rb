@@ -9,7 +9,7 @@ require 'viaggiatreno/model/train/train_state'
 require 'viaggiatreno/model/station/train_stop_state'
 require 'viaggiatreno/model/station/train_stop'
 
-# Class to scrape data from viaggiatreno website
+# Class to scrape train data from viaggiatreno website
 class TrainScraper
   def initialize(train_number, train)
     @site_info_main = ViaggiatrenoURLs.get_train_info_url train_number
@@ -122,5 +122,40 @@ class TrainScraper
       xpath.xpath(XPathMatchInfo::XPATH_DETAILS_ACTUAL_STOP_TIME).first
     ).to_s
     [scheduled_arrival_time, actual_arrival_time]
+  end
+end
+
+# Class to scrape station data from viaggiatreno website
+class StationScraper
+  def initialize(station_name, station)
+    @station_name = station_name
+    @station = station
+  end
+
+  def update
+    agent = Mechanize.new
+    page = agent.get(ViaggiatrenoURLs.site_station_info_url)
+    page.forms.first.fields.first.value = @station_name
+    @result = agent.submit(page.forms.first)
+
+    @station.outgoing_trains.clear
+    @station.incoming_trains.clear
+    processing_outgoing_trains = false
+    @result.search("//div[@class='corpocentrale' or @class='bloccorisultato']")
+           .each do |result|
+      if result.attributes['class'].value == 'bloccorisultato'
+        train_number = result.search('.//h2/text()').to_s.split(' ')[1]
+        train = Train.new(train_number)
+        if processing_outgoing_trains
+          @station.outgoing_trains.append(train)
+        else
+          @station.incoming_trains.append(train)
+        end
+      end
+      if result.attributes['class'].value == 'corpocentrale'
+        processing_outgoing_trains = !processing_outgoing_trains
+        next
+      end
+    end
   end
 end

@@ -10,5 +10,4 @@ class RegExpMatchInfo
   REGEXP_SCHEDULED_RAIL = /Binario Previsto: (\d+|--)/.freeze
   REGEXP_ACTUAL_RAIL = /Binario Reale: (\d+|--)/.freeze
   STR_DELAY_STR = 'ritardo'.freeze
-  STR_TRAIN_NUMBER_URL_REPLACE = 'TRAINNUMBER'.freeze
 end
