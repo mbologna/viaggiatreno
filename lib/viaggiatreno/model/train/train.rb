@@ -94,11 +94,9 @@ class Train
     nil
   end
 
-  private
-
   def find_stop_time(station_name)
     train_stops.each do |train_stop|
-      if train_stop.train_station.to_s == station_name
+      if train_stop.train_station.to_s.casecmp(station_name).zero?
         return \
         {
           'actual' => "#{train_stop.actual_stop_time} [#{train_stop.status}]",
