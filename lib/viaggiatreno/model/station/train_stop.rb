@@ -20,8 +20,8 @@ class TrainStop
       done = ' '
       actual_or_expected = 'EXPECTED'
     end
-    retstr = "[#{done}] #{train_station} = SCHEDULED: #{scheduled_stop_time}"\
-              " #{actual_or_expected}: #{actual_stop_time}"
+    retstr = "[#{done}] #{train_station} = SCHEDULED: #{scheduled_stop_time}\
+ #{actual_or_expected}: #{actual_stop_time}"
     retstr
   end
 end

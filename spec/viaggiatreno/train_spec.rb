@@ -13,7 +13,7 @@ describe Train do
     it do
       expect(@train.to_s).to eq \
         '2550 REG 2550: Il treno e\' arrivato con 2 minuti di anticipo state'\
-        ': ARRIVED,     delay: -2, last_update: '
+        ': ARRIVED, delay: -2, last_update: '
       expect(@train.state).to eq TrainState::ARRIVED
       expect(@train.delay).to eq(-2)
       expect(@train.train_number).to eq '2550'
@@ -62,7 +62,7 @@ describe Train do
     it do
       expect(@train.to_s).to eq \
         '3961 REG 3961: Il treno e\' arrivato in orario state: ARRIVED'\
-        ',     delay: 0, last_update: '
+        ', delay: 0, last_update: '
       expect(@train.state).to eq TrainState::ARRIVED
       expect(@train.delay).to eq 0
       expect(@train.train_number).to eq '3961'
@@ -97,7 +97,7 @@ describe Train do
     it do
       expect(@train.to_s).to eq \
         '2109 REG 2109: Il treno e\' arrivato con 3 minuti di ritardo state: '\
-        'ARRIVED,     delay: 3, last_update: '
+        'ARRIVED, delay: 3, last_update: '
       expect(@train.state).to eq TrainState::ARRIVED
       expect(@train.delay).to eq 3
       expect(@train.train_number).to eq '2109'
@@ -133,7 +133,7 @@ describe Train do
     it do
       expect(@train.to_s).to eq \
         '2655 REG 2655: Il treno viaggia con 1 minuti di ritardo state: '\
-        'TRAVELING,     delay: 1, last_update: MILANO LAMBRATE alle ore 14:28'
+        'TRAVELING, delay: 1, last_update: MILANO LAMBRATE alle ore 14:28'
       expect(@train.state).to eq TrainState::TRAVELING
       expect(@train.delay).to eq 1
       expect(@train.train_number).to eq '2655'
@@ -180,7 +180,7 @@ describe Train do
     it do
       expect(@train.to_s).to eq \
         '2657 REG 2657: Il treno non e\' ancora partito state: '\
-        'NOT DEPARTED,     delay: , last_update: '
+        'NOT DEPARTED, delay: , last_update: '
       expect(@train.state).to eq TrainState::NOT_DEPARTED
       expect(@train.delay).to eq nil
       expect(@train.train_number).to eq '2657'
