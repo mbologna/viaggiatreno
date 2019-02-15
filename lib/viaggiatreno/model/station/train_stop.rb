@@ -3,25 +3,18 @@ require_relative 'train_stop_state'
 # Represent a stop in the journey of the train
 class TrainStop
   attr_accessor :train_station, :scheduled_stop_time, :actual_stop_time,
-                :scheduled_rail, :actual_rail, :status
+                :scheduled_platform, :actual_platform, :state
 
-  def initialize(train_station, stop_time, rail, status)
+  def initialize(train_station, stop_time, platform, state)
     @train_station = train_station
     @scheduled_stop_time, @actual_stop_time = stop_time
-    @scheduled_rail, @actual_rail = rail
-    @status = status
-  end
-
-  def to_s
-    if @status == TrainStopState::DONE
-      done = 'X'
-      actual_or_expected = 'ACTUAL'
-    elsif @status == TrainStopState::TO_BE_DONE
-      done = ' '
-      actual_or_expected = 'EXPECTED'
+    @scheduled_platform, @actual_platform = platform
+    @state = state
+    if state == TrainStopState::SUPPRESSED
+      @actual_stop_time, @actual_platform = nil
     end
-    retstr = "[#{done}] #{train_station} = SCHEDULED: #{scheduled_stop_time}\
- #{actual_or_expected}: #{actual_stop_time}"
-    retstr
   end
+end
+
+class StopNotFound < StandardError
 end

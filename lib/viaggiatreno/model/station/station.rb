@@ -13,22 +13,8 @@ class Station
   end
 
   def update
+    @outgoing_trains = []
+    @incoming_trains = []
     @scraper.update
-  end
-
-  def to_s
-    puts 'Outgoing: '
-    @outgoing_trains.each do |train|
-      puts train.train_number
-      puts train.find_stop_time(@station_name)
-      puts train.train_stops.last.train_station
-    end
-
-    puts 'Incoming: '
-    @incoming_trains.each do |train|
-      puts train.train_number
-      puts train.find_stop_time(@station_name)
-      puts train.train_stops.first.train_station
-    end
   end
 end

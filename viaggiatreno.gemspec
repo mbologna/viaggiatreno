@@ -26,6 +26,5 @@ Gem::Specification.new do |gem|
   gem.require_paths = ['lib']
 
   gem.add_dependency 'mechanize'
-  gem.add_dependency 'nokogiri'
   gem.add_development_dependency 'rake'
 end

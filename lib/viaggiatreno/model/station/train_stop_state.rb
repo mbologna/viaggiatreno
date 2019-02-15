@@ -1,5 +1,6 @@
 class TrainStopState
-  # train station status: already done ("DONE") or to be done ("TO_BE_DONE")
+  # Train stop status
   DONE = 'DONE'.freeze
-  TO_BE_DONE = 'TO_BE_DONE'.freeze
+  TO_BE_DONE = 'TO BE DONE'.freeze
+  SUPPRESSED = 'SUPPRESSED'.freeze
 end
