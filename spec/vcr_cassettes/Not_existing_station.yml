@@ -1,0 +1,130 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: http://mobile.viaggiatreno.it/vt_pax_internet/mobile/stazione
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip,deflate,identity
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Mechanize/2.7.6 Ruby/2.6.1p33 (http://github.com/sparklemotion/mechanize/)
+      Accept-Charset:
+      - ISO-8859-1,utf-8;q=0.7,*;q=0.7
+      Accept-Language:
+      - en-us,en;q=0.5
+      Host:
+      - mobile.viaggiatreno.it
+      Connection:
+      - keep-alive
+      Keep-Alive:
+      - '300'
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Sun, 24 Feb 2019 21:54:20 GMT
+      X-Frame-Options:
+      - SAMEORIGIN
+      Strict-Transport-Security:
+      - max-age=63072000; includeSubdomains; preload
+      X-Powered-By:
+      - Servlet/3.0
+      Content-Length:
+      - '1886'
+      Set-Cookie:
+      - JSESSIONID=0000C9-8KwevTZ1NMcaEf68gBXr:1b8eiui7s; Path=/; HttpOnly
+      - NSC_WJQ_UJ-XFCWUS-QSPE_96.15*80=ffffffff09f07c4345525d5f4f58455e445a4a423664;expires=Sun,
+        24-Feb-2019 21:44:32 GMT;path=/;httponly
+      Expires:
+      - Thu, 01 Dec 1994 16:00:00 GMT
+      Cache-Control:
+      - no-cache="set-cookie, set-cookie2"
+      X-Xss-Protection:
+      - 1; mode=block
+      Keep-Alive:
+      - timeout=10, max=100
+      Connection:
+      - Keep-Alive
+      Content-Type:
+      - text/html; charset=UTF-8
+      Content-Language:
+      - en-US
+    body:
+      encoding: ASCII-8BIT
+      string: !binary |-
+        77u/DQoNCg0KPD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4NCjwhRE9DVFlQRSBodG1sIFBVQkxJQyAiLS8vV0FQRk9SVU0vL0RURCBYSFRNTCBNb2JpbGUgMS4wLy9FTiIgImh0dHA6Ly93d3cud2FwZm9ydW0ub3JnL0RURC94aHRtbC1tb2JpbGUxMC5kdGQiPg0KPGh0bWwgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGh0bWwiPg0KCTxoZWFkPg0KCQk8bWV0YSBodHRwLWVxdWl2PSJDb250ZW50LVR5cGUiIGNvbnRlbnQ9InRleHQvaHRtbDsgY2hhcnNldD11dGYtOCIgLz4NCgkJPHRpdGxlPkNlcmNhIFRyZW5vIChTdGF6aW9uZSk8L3RpdGxlPg0KCQk8bGluayBocmVmPSIuLi9jc3MvbW9iaWxlLmNzcyIgcmVsPSJzdHlsZXNoZWV0IiB0eXBlPSJ0ZXh0L2NzcyIgLz4NCgk8L2hlYWQ+DQoNCgk8Ym9keT4NCgkJPCEtLSBURVNUQVRBIC0tPg0KCQk8ZGl2Pg0KDQo8ZGl2IGNsYXNzPSJ0ZXN0YXRhX3JlZCI+DQoJDQo8L2Rpdj4gPC9kaXY+DQoJCTwhLS0gVElUT0xPIC0tPg0KCQk8aDE+Q2VyY2EgVHJlbm8gUGVyIFN0YXppb25lPC9oMT4NCg0KCQk8IS0tIENPUlBPIFNVIEJJQU5DTyAtLT4NCgkJPGRpdiBjbGFzcz0iY29ycG9jZW50cmFsZSI+DQoJCQk8Zm9ybSBtZXRob2Q9InBvc3QiIGlkPSJjZXJjYSIgYWN0aW9uPSIvdnRfcGF4X2ludGVybmV0L21vYmlsZS9zdGF6aW9uZSI+DQoJCQkJPHA+DQoJCQkJPGxhYmVsIGZvcj0ic3RhemlvbmUiPlN0YXppb25lPC9sYWJlbD4NCgkJCQk8YnIvPg0KCQkJCQ0KCQkJCQkNCgkJCQkJCTxpbnB1dCBuYW1lPSJzdGF6aW9uZSIgdHlwZT0idGV4dCIgaWQ9InN0YXppb25lIiBhY2Nlc3NrZXk9InAiIHRhYmluZGV4PSIxIiBzaXplPSIxNSIgdmFsdWU9IiIgLz4NCgkJCQkJCQ0KCQkJCQkNCgkJCQkJDQoJCQkJDQoJCQkJPGJyLz4NCiAgICAgICAgICAgICAgICA8aW5wdXQgdHlwZT0iaGlkZGVuIiBuYW1lPSJsYW5nIiB2YWx1ZT0iSVQiIC8+DQogICAgICAgICAgICAgICAgPGlucHV0IHR5cGU9InN1Ym1pdCIgaWQ9InN1Ym1pdCIgYWNjZXNza2V5PSJjIiB0YWJpbmRleD0iMTAiIHZhbHVlPSIgQ2VyY2EgIi8+DQoJCQkJPC9wPg0KCQkJPC9mb3JtPg0KCQk8L2Rpdj4NCg0KCQk8IS0tIEZPT1RFUiArIExJTksgLS0+DQoJCTxkaXYgaWQ9ImZvb3RlciI+DQoJCQk8YSBocmVmPSIvdnRfcGF4X2ludGVybmV0L21vYmlsZS9zdGF6aW9uZT9sYW5nPUlUIj7CuyBOdW92YSByaWNlcmNhIDwvYT48YnIvPg0KCQkJPGEgaHJlZj0iL3Z0X3BheF9pbnRlcm5ldC9tb2JpbGUvbnVtZXJvP2xhbmc9SVQiPsK7IENlcmNhIFRyZW5vIHBlciBudW1lcm88L2E+PGJyLz4NCgkJCTxhIGhyZWY9Ii92dF9wYXhfaW50ZXJuZXQvbW9iaWxlL3RyYWdpdHRvP2xhbmc9SVQiPsK7IENlcmNhIHBlciBkYXRpIGRpIHZpYWdnaW88L2E+PGJyLz4NCgkJCTxwPjxpbWcgc3JjPSIuLi9pbWFnZXMvaWNvbmFSaWNlcmNhLnBuZyIgc3R5bGU9InZlcnRpY2FsLWFsaWduOiBtaWRkbGU7Ii8+PGEgaHJlZj0iL3Z0X3BheF9pbnRlcm5ldC9tb2JpbGUvcHJvZ3JhbW1hdG8/bGFuZz1JVCI+T3JhcmlvIFRyZW5pPC9hPjwvcD4NCiAgICAgICAgICAgIDxwPg0KICAgICAgICAgICAgICAgPGEgaHJlZj0iL3Z0X3BheF9pbnRlcm5ldC9tb2JpbGUvc3RhemlvbmU/bGFuZz1FTiI+RU48L2E+DQogICAgICAgICAgICAgICA8YSBocmVmPSIvdnRfcGF4X2ludGVybmV0L21vYmlsZS9zdGF6aW9uZT9sYW5nPURFIj5ERTwvYT4NCiAgICAgICAgICAgIDwvcD4NCg0KICAgICAgICAgICAgPHAgaWQ9ImNvcHlub3RlIj5Db3B5cmlnaHQgVHJlbml0YWxpYSBTLnAuQS4gMjAwNi48YnIgLz5UdXR0aSBpIGRpcml0dGkgcmlzZXJ2YXRpLjwvcD4NCgkJPC9kaXY+DQoNCgk8L2JvZHk+DQo8L2h0bWw+DQo=
+    http_version: 
+  recorded_at: Sun, 24 Feb 2019 21:54:20 GMT
+- request:
+    method: post
+    uri: http://mobile.viaggiatreno.it/vt_pax_internet/mobile/stazione
+    body:
+      encoding: UTF-8
+      string: stazione=Not+exists&lang=IT
+    headers:
+      Accept-Encoding:
+      - gzip,deflate,identity
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Mechanize/2.7.6 Ruby/2.6.1p33 (http://github.com/sparklemotion/mechanize/)
+      Accept-Charset:
+      - ISO-8859-1,utf-8;q=0.7,*;q=0.7
+      Accept-Language:
+      - en-us,en;q=0.5
+      Cookie:
+      - JSESSIONID=0000C9-8KwevTZ1NMcaEf68gBXr:1b8eiui7s
+      Host:
+      - mobile.viaggiatreno.it
+      Referer:
+      - http://mobile.viaggiatreno.it/vt_pax_internet/mobile/stazione
+      Content-Type:
+      - application/x-www-form-urlencoded
+      Content-Length:
+      - '27'
+      Connection:
+      - keep-alive
+      Keep-Alive:
+      - '300'
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Sun, 24 Feb 2019 21:54:20 GMT
+      X-Frame-Options:
+      - SAMEORIGIN
+      Strict-Transport-Security:
+      - max-age=63072000; includeSubdomains; preload
+      X-Powered-By:
+      - Servlet/3.0
+      Content-Length:
+      - '2018'
+      X-Xss-Protection:
+      - 1; mode=block
+      Keep-Alive:
+      - timeout=10, max=100
+      Connection:
+      - Keep-Alive
+      Content-Type:
+      - text/html; charset=UTF-8
+      Content-Language:
+      - en-US
+      Set-Cookie:
+      - NSC_WJQ_UJ-XFCWUS-QSPE_96.15*80=ffffffff09f07c5d45525d5f4f58455e445a4a423664;expires=Sun,
+        24-Feb-2019 21:44:32 GMT;path=/;httponly
+    body:
+      encoding: ASCII-8BIT
+      string: !binary |-
+        77u/DQoNCg0KPD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4NCjwhRE9DVFlQRSBodG1sIFBVQkxJQyAiLS8vV0FQRk9SVU0vL0RURCBYSFRNTCBNb2JpbGUgMS4wLy9FTiIgImh0dHA6Ly93d3cud2FwZm9ydW0ub3JnL0RURC94aHRtbC1tb2JpbGUxMC5kdGQiPg0KPGh0bWwgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGh0bWwiPg0KCTxoZWFkPg0KCQk8bWV0YSBodHRwLWVxdWl2PSJDb250ZW50LVR5cGUiIGNvbnRlbnQ9InRleHQvaHRtbDsgY2hhcnNldD11dGYtOCIgLz4NCgkJPHRpdGxlPkNlcmNhIFRyZW5vIChTdGF6aW9uZSk8L3RpdGxlPg0KCQk8bGluayBocmVmPSIuLi9jc3MvbW9iaWxlLmNzcyIgcmVsPSJzdHlsZXNoZWV0IiB0eXBlPSJ0ZXh0L2NzcyIgLz4NCgk8L2hlYWQ+DQoNCgk8Ym9keT4NCgkJPCEtLSBURVNUQVRBIC0tPg0KCQk8ZGl2Pg0KDQo8ZGl2IGNsYXNzPSJ0ZXN0YXRhX3JlZCI+DQoJDQo8L2Rpdj4gPC9kaXY+DQoJCTwhLS0gVElUT0xPIC0tPg0KCQk8aDE+Q2VyY2EgVHJlbm8gUGVyIFN0YXppb25lPC9oMT4NCg0KCQk8IS0tIENPUlBPIFNVIEJJQU5DTyAtLT4NCgkJPGRpdiBjbGFzcz0iY29ycG9jZW50cmFsZSI+DQoJCQk8Zm9ybSBtZXRob2Q9InBvc3QiIGlkPSJjZXJjYSIgYWN0aW9uPSIvdnRfcGF4X2ludGVybmV0L21vYmlsZS9zdGF6aW9uZSI+DQoJCQkJPHA+DQoJCQkJPGxhYmVsIGZvcj0ic3RhemlvbmUiPlN0YXppb25lPC9sYWJlbD4NCgkJCQk8YnIvPg0KCQkJCQ0KCQkJCQkNCgkJCQkJCTxpbnB1dCBuYW1lPSJzdGF6aW9uZSIgdHlwZT0idGV4dCIgaWQ9InN0YXppb25lIiBhY2Nlc3NrZXk9InAiIHRhYmluZGV4PSIxIiBzaXplPSIxNSIgdmFsdWU9Ik5vdCBleGlzdHMiIC8+DQoJCQkJCQkNCgkJCQkJCQk8c3BhbiBjbGFzcz0iZXJyb3JlIj4NCgkJCQkJCQkJDQoJCQkJCQkJCQkNCgkJCQkJCQkJCWxvY2FsaXRhJiMwMzk7IG5vbiB0cm92YXRhDQoJCQkJCQkJCQ0KCQkJCQkJCTwvc3Bhbj4NCgkJCQkJCQ0KCQkJCQkNCgkJCQkJDQoJCQkJDQoJCQkJPGJyLz4NCiAgICAgICAgICAgICAgICA8aW5wdXQgdHlwZT0iaGlkZGVuIiBuYW1lPSJsYW5nIiB2YWx1ZT0iSVQiIC8+DQogICAgICAgICAgICAgICAgPGlucHV0IHR5cGU9InN1Ym1pdCIgaWQ9InN1Ym1pdCIgYWNjZXNza2V5PSJjIiB0YWJpbmRleD0iMTAiIHZhbHVlPSIgQ2VyY2EgIi8+DQoJCQkJPC9wPg0KCQkJPC9mb3JtPg0KCQk8L2Rpdj4NCg0KCQk8IS0tIEZPT1RFUiArIExJTksgLS0+DQoJCTxkaXYgaWQ9ImZvb3RlciI+DQoJCQk8YSBocmVmPSIvdnRfcGF4X2ludGVybmV0L21vYmlsZS9zdGF6aW9uZT9sYW5nPUlUIj7CuyBOdW92YSByaWNlcmNhIDwvYT48YnIvPg0KCQkJPGEgaHJlZj0iL3Z0X3BheF9pbnRlcm5ldC9tb2JpbGUvbnVtZXJvP2xhbmc9SVQiPsK7IENlcmNhIFRyZW5vIHBlciBudW1lcm88L2E+PGJyLz4NCgkJCTxhIGhyZWY9Ii92dF9wYXhfaW50ZXJuZXQvbW9iaWxlL3RyYWdpdHRvP2xhbmc9SVQiPsK7IENlcmNhIHBlciBkYXRpIGRpIHZpYWdnaW88L2E+PGJyLz4NCgkJCTxwPjxpbWcgc3JjPSIuLi9pbWFnZXMvaWNvbmFSaWNlcmNhLnBuZyIgc3R5bGU9InZlcnRpY2FsLWFsaWduOiBtaWRkbGU7Ii8+PGEgaHJlZj0iL3Z0X3BheF9pbnRlcm5ldC9tb2JpbGUvcHJvZ3JhbW1hdG8/bGFuZz1JVCI+T3JhcmlvIFRyZW5pPC9hPjwvcD4NCiAgICAgICAgICAgIDxwPg0KICAgICAgICAgICAgICAgPGEgaHJlZj0iL3Z0X3BheF9pbnRlcm5ldC9tb2JpbGUvc3RhemlvbmU/bGFuZz1FTiI+RU48L2E+DQogICAgICAgICAgICAgICA8YSBocmVmPSIvdnRfcGF4X2ludGVybmV0L21vYmlsZS9zdGF6aW9uZT9sYW5nPURFIj5ERTwvYT4NCiAgICAgICAgICAgIDwvcD4NCg0KICAgICAgICAgICAgPHAgaWQ9ImNvcHlub3RlIj5Db3B5cmlnaHQgVHJlbml0YWxpYSBTLnAuQS4gMjAwNi48YnIgLz5UdXR0aSBpIGRpcml0dGkgcmlzZXJ2YXRpLjwvcD4NCgkJPC9kaXY+DQoNCgk8L2JvZHk+DQo8L2h0bWw+DQo=
+    http_version: 
+  recorded_at: Sun, 24 Feb 2019 21:54:20 GMT
+recorded_with: VCR 4.0.0
