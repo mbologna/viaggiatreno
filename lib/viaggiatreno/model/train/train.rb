@@ -20,11 +20,6 @@ class Train
     @scraper.update_train_details
   end
 
-  def to_s
-    "#{@train_number} #{@train_name}: #{@status} state: #{@state}, \
-    delay: #{@delay}, last_update: #{@last_update}"
-  end
-
   def add_stop(train_stop)
     @train_stops << train_stop
   end
@@ -86,7 +81,7 @@ class Train
     return train_stops.last.to_s if @state == TrainState::ARRIVED
 
     train_stops.each_with_index do |train_stop, index|
-      if train_stop.status == TrainStopState::DONE && \
+      if train_stop.status == TrainStopState::DONE &&
          train_stops[index + 1].status == TrainStopState::TO_BE_DONE
         return train_stop.to_s
       end
@@ -105,5 +100,10 @@ class Train
         }
       end
     end
+  end
+
+  def to_s
+    "#{@train_number} #{@train_name}: #{@status} state: #{@state}, "\
+"delay: #{@delay}, last_update: #{@last_update}"
   end
 end
