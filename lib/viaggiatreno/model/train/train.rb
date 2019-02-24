@@ -27,7 +27,6 @@ class Train
         return stop.train_station
       end
     end
-    stops.first.train_station
   end
 
   def arriving_station
@@ -47,7 +46,6 @@ class Train
         return stop.scheduled_stop_time
       end
     end
-    stops.first.scheduled_stop_time
   end
 
   def scheduled_arriving_time
