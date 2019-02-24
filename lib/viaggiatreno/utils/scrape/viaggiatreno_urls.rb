@@ -7,17 +7,4 @@ class ViaggiatrenoURLs
   class << self
     attr_accessor :site_station_info_url
   end
-
-  def self.get_train_info_url(train_number)
-    VIAGGIATRENO_URL + 'numero?numeroTreno=' +
-      train_number +
-      '&tipoRicerca=numero&lang=IT'
-  end
-
-  def self.get_train_info_details_url(train_number)
-    VIAGGIATRENO_URL +
-      'scheda?dettaglio=visualizza&numeroTreno=' +
-      train_number +
-      '&tipoRicerca=numero&lang=IT'
-  end
 end
