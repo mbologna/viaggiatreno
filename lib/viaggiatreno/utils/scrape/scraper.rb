@@ -87,14 +87,12 @@ class TrainScraper
   def update_trainstop_status(xml, train)
     status = if xml.attributes['class'].value =~
                 RegExMatchInfo::TRAIN_STOP_ALREADY_DONE &&
-                train.state != TrainState::NOT_DEPARTED
+                train.state != TrainState::NOT_DEPARTED && xml.search(XPathMatchInfo::TRAIN_DETAILS_SUPPRESSED_STOP).text == StringUtils::EMPTY_STRING
                TrainStopState::DONE
+             elsif train.status =~ RegExMatchInfo::TRAIN_STATE_ARRIVED || xml.search(XPathMatchInfo::TRAIN_DETAILS_SUPPRESSED_STOP).text == StringUtils::SUPPRESSED_STOP
+               TrainStopState::SUPPRESSED
              else
-               if train.status =~ RegExMatchInfo::TRAIN_STATE_ARRIVED or xml.search(XPathMatchInfo::TRAIN_DETAILS_SUPPRESSED_STOP).text == StringUtils::SUPPRESSED_STOP
-                TrainStopState::SUPPRESSED
-               else
-                TrainStopState::TO_BE_DONE
-               end
+               TrainStopState::TO_BE_DONE
              end
     status
   end
