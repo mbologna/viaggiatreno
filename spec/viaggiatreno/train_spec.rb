@@ -43,7 +43,7 @@ describe Train do
       expect(@train.stops.map(&:actual_platform)).to eq \
         [nil, "4", "2", "II", "3", "3"]
       expect(@train.stops.map(&:state)).to eq \
-        ["DONE", "DONE", "DONE", "DONE", "DONE", "DONE"]
+        [TrainStopState::DONE] * @train.stops.size
     end
   end
 
@@ -91,13 +91,13 @@ describe Train do
       expect(@train.stops.map(&:actual_platform)).to eq \
         [nil, "3", "3", "3", "3", "3", "5", "5", "6"]
       expect(@train.stops.map(&:state)).to eq \
-        ["DONE", "DONE", "DONE", "DONE", "DONE", "DONE", "DONE", "DONE", "DONE"]  
+        [TrainStopState::DONE] * @train.stops.size
     end
   end
 
-  describe 'Arrived train with suppressed stops and delay' do
+  describe 'Arrived train with suppressed stops at the end' do
     before do
-      VCR.use_cassette('Arrived train with suppressed stops and delay') do
+      VCR.use_cassette('Arrived train with suppressed stops at the end') do
         @train = Train.new('2550')
       end
     end
@@ -177,7 +177,7 @@ describe Train do
       expect(@train.stops.map(&:actual_platform)).to eq \
         [nil, "2", "4", nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil]
       expect(@train.stops.map(&:state)).to eq \
-        ["DONE", "DONE", "DONE", "TO BE DONE", "TO BE DONE", "TO BE DONE", "TO BE DONE", "TO BE DONE", "TO BE DONE", "TO BE DONE", "TO BE DONE", "TO BE DONE", "TO BE DONE", "TO BE DONE"]
+        [TrainStopState::DONE] * 3 + [TrainStopState::TO_BE_DONE] * (@train.stops.size - 3)
     end
   end
 
@@ -221,7 +221,7 @@ describe Train do
       expect(@train.stops.map(&:actual_platform)).to eq \
         [nil, "18", "1", "6", "12", "10", "16", "1", nil]
       expect(@train.stops.map(&:state)).to eq \
-        ["DONE", "DONE", "DONE", "DONE", "DONE", "DONE", "DONE", "DONE", "TO BE DONE"]
+        [TrainStopState::DONE] * (@train.stops.size - 1) + [TrainStopState::TO_BE_DONE]
     end
   end
 
@@ -265,7 +265,7 @@ describe Train do
       expect(@train.stops.map(&:actual_platform)).to eq \
         [nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil]
       expect(@train.stops.map(&:state)).to eq \
-        ["DONE", "DONE", "DONE", "DONE", "DONE", "DONE", "DONE", "TO BE DONE", "TO BE DONE", "TO BE DONE", "TO BE DONE", "TO BE DONE", "TO BE DONE", "TO BE DONE", "TO BE DONE"]
+        [TrainStopState::DONE] * 7 + [TrainStopState::TO_BE_DONE] * (@train.stops.size - 7)
     end
   end
 
@@ -307,7 +307,7 @@ describe Train do
       expect(@train.stops.map(&:actual_platform)).to eq \
         [nil, nil, nil, nil, nil, nil, nil, nil]
       expect(@train.stops.map(&:state)).to eq \
-        ["TO BE DONE", "TO BE DONE", "TO BE DONE", "TO BE DONE", "TO BE DONE", "TO BE DONE", "TO BE DONE", "TO BE DONE"]
+        [TrainStopState::TO_BE_DONE] * @train.stops.size
     end
   end
 
