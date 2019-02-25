@@ -10,9 +10,7 @@ class TrainStop
     @scheduled_stop_time, @actual_stop_time = stop_time
     @scheduled_platform, @actual_platform = platform
     @state = state
-    if state == TrainStopState::SUPPRESSED
-      @actual_stop_time, @actual_platform = nil
-    end
+    @actual_stop_time, @actual_platform = nil if state == TrainStopState::SUPPRESSED
   end
 end
 
