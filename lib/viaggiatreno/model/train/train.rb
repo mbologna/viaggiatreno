@@ -82,6 +82,7 @@ class Train
     if state == TrainState::NOT_DEPARTED || state == TrainState::SUPPRESSED
       return nil
     end
+
     stops.first.actual_platform
   end
 

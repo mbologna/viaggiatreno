@@ -27,14 +27,14 @@ class TrainScraper
       @result_train = result
     end
 
-    error = StringUtils::remove_newlines_tabs_and_spaces(@result_train.search(XPathMatchInfo::SEARCH_ERROR).text)
+    error = StringUtils.remove_newlines_tabs_and_spaces(@result_train.search(XPathMatchInfo::SEARCH_ERROR).text)
     if error != StringUtils::EMPTY_STRING
       @train.train_number = nil
       return
     end
-    @train.status = StringUtils::remove_newlines_tabs_and_spaces(@result_train.search(XPathMatchInfo::TRAIN_STATUS).text)
-    extraordinary_event = StringUtils::remove_newlines_tabs_and_spaces(@result_train.search(XPathMatchInfo::TRAIN_EXTRAORDINARY_EVENT).text)
-    @train.status += ". " + extraordinary_event if extraordinary_event != ""
+    @train.status = StringUtils.remove_newlines_tabs_and_spaces(@result_train.search(XPathMatchInfo::TRAIN_STATUS).text)
+    extraordinary_event = StringUtils.remove_newlines_tabs_and_spaces(@result_train.search(XPathMatchInfo::TRAIN_EXTRAORDINARY_EVENT).text)
+    @train.status += '. ' + extraordinary_event if extraordinary_event != StringUtils::EMPTY_STRING
     @train.train_name = @result_train.search(XPathMatchInfo::TRAIN_NAME)
                                      .first.content
     update_train_status(@train)
@@ -43,9 +43,9 @@ class TrainScraper
     stops_detail_link = @result_train.link_with text: StringUtils::STOPS_DETAIL
     @result_train_detail = agent.get(stops_detail_link.click)
     @result_train_detail.search(XPathMatchInfo::TRAIN_DETAILS_GENERIC)
-               .each_with_index do |xml, index|
+                        .each_with_index do |xml, index|
       station_name = xml.search(XPathMatchInfo::TRAIN_DETAILS_STATION_NAME)
-                      .first.text
+                        .first.text
       arrival_time = fetch_trainstop_arrival_time(xml)
       platform = fetch_platform(xml, index)
       train_stop_state = update_trainstop_status(xml, @train)
@@ -78,7 +78,7 @@ class TrainScraper
       @train.delay = 0
     else
       @train.delay = @train.status.match(RegExMatchInfo::TRAIN_DELAY_STR)[1].to_i
-      if not @train.status.match(RegExMatchInfo::TRAIN_DELAY_STR)[2].casecmp(StringUtils::DELAY_STR).zero?
+      unless @train.status.match(RegExMatchInfo::TRAIN_DELAY_STR)[2].casecmp(StringUtils::DELAY_STR).zero?
         @train.delay *= -1 # train is ahead of schedule, delay is negative
       end
     end
@@ -105,25 +105,25 @@ class TrainScraper
     scheduled_platform = regex_match[1].strip
     actual_platform = regex_match[2].strip
 
-    if (index == 0 or index == (@result_train_detail.search(XPathMatchInfo::TRAIN_DETAILS_GENERIC).size - 1)) and (scheduled_platform == StringUtils::EMPTY_STRING or actual_platform == StringUtils::EMPTY_STRING)
-      if index == 0
-        second_match = StringUtils::remove_newlines_tabs_and_spaces(@result_train.search(XPathMatchInfo::TRAIN_DETAILS_GENERIC)[0].text).match(RegExMatchInfo::TRAIN_STOP_PLATFORM)
+    if (index.zero? || index == (@result_train_detail.search(XPathMatchInfo::TRAIN_DETAILS_GENERIC).size - 1)) && (scheduled_platform == StringUtils::EMPTY_STRING || actual_platform == StringUtils::EMPTY_STRING)
+      if index.zero?
+        second_match = StringUtils.remove_newlines_tabs_and_spaces(@result_train.search(XPathMatchInfo::TRAIN_DETAILS_GENERIC)[0].text).match(RegExMatchInfo::TRAIN_STOP_PLATFORM)
         scheduled_platform = second_match[1].strip
         actual_platform = second_match[2].strip
       elsif index == (@result_train_detail.search(XPathMatchInfo::TRAIN_DETAILS_GENERIC).size - 1)
-        if @train.state == TrainState::ARRIVED or @train.state == TrainState::NOT_DEPARTED
-          second_match = StringUtils::remove_newlines_tabs_and_spaces(@result_train.search(XPathMatchInfo::TRAIN_DETAILS_GENERIC)[1].text).match(RegExMatchInfo::TRAIN_STOP_PLATFORM)
+        if @train.state == TrainState::ARRIVED || @train.state == TrainState::NOT_DEPARTED
+          second_match = StringUtils.remove_newlines_tabs_and_spaces(@result_train.search(XPathMatchInfo::TRAIN_DETAILS_GENERIC)[1].text).match(RegExMatchInfo::TRAIN_STOP_PLATFORM)
         else
-          second_match = StringUtils::remove_newlines_tabs_and_spaces(@result_train.search(XPathMatchInfo::TRAIN_DETAILS_GENERIC)[2].text).match(RegExMatchInfo::TRAIN_STOP_PLATFORM)
+          second_match = StringUtils.remove_newlines_tabs_and_spaces(@result_train.search(XPathMatchInfo::TRAIN_DETAILS_GENERIC)[2].text).match(RegExMatchInfo::TRAIN_STOP_PLATFORM)
         end
         scheduled_platform = second_match[1].strip
         actual_platform = second_match[2].strip
       end
     end
     
-    scheduled_platform = nil if scheduled_platform == ""
-    actual_platform = nil if actual_platform == "" or @train.state == TrainState::NOT_DEPARTED or @train.state == TrainState::SUPPRESSED
-    
+    scheduled_platform = nil if scheduled_platform == StringUtils::EMPTY_STRING
+    actual_platform = nil if actual_platform == StringUtils::EMPTY_STRING || @train.state == TrainState::NOT_DEPARTED || @train.state == TrainState::SUPPRESSED
+
     [scheduled_platform, actual_platform]
   end
 
@@ -134,8 +134,8 @@ class TrainScraper
     actual_arrival_time = StringUtils.remove_newlines_tabs_and_spaces(
       xpath.search(XPathMatchInfo::TRAIN_DETAILS_ACTUAL_STOP_TIME).first.text
     )
-    scheduled_arrival_time = nil if scheduled_arrival_time == ""
-    actual_arrival_time = nil if actual_arrival_time == "" or @train.state == TrainState::NOT_DEPARTED or @train.state == TrainState::SUPPRESSED
+    scheduled_arrival_time = nil if scheduled_arrival_time == StringUtils::EMPTY_STRING
+    actual_arrival_time = nil if actual_arrival_time == StringUtils::EMPTY_STRING || @train.state == TrainState::NOT_DEPARTED || @train.state == TrainState::SUPPRESSED
     [scheduled_arrival_time, actual_arrival_time]
   end
 end
@@ -155,7 +155,7 @@ class StationScraper
 
     processing_outgoing_trains = false
 
-    error = StringUtils::remove_newlines_tabs_and_spaces(@result.search(XPathMatchInfo::SEARCH_ERROR).text)
+    error = StringUtils.remove_newlines_tabs_and_spaces(@result.search(XPathMatchInfo::SEARCH_ERROR).text)
     if error != StringUtils::EMPTY_STRING
       @station.station_name = nil
       return
