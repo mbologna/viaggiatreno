@@ -10,7 +10,7 @@ class XPathMatchInfo
   TRAIN_DETAILS_SUPPRESSED_STOP = 'strong/font'.freeze
   TRAIN_DETAILS_SCHEDULED_STOP_TIME = './p[1]/strong[1]/text()'.freeze
   TRAIN_DETAILS_ACTUAL_STOP_TIME = './p[2]/strong[1]/text()'.freeze
-  STATION_LIST = '//div[@class="corpocentrale" or @class="bloccorisultato"]'
-  STATION_TRAIN_NUMBER = './/h2/text()'
-  STATION_NAME = '//h1/text()'
+  STATION_LIST = '//div[@class="corpocentrale" or @class="bloccorisultato"]'.freeze
+  STATION_TRAIN_NUMBER = './/h2/text()'.freeze
+  STATION_NAME = '//h1/text()'.freeze
 end

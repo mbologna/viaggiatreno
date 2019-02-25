@@ -2,12 +2,12 @@
 class StringUtils
   DELAY_STR = 'ritardo'.freeze
   STOPS_DETAIL = '» Vedi dettaglio fermate'.freeze
-  RESULT_BLOCK = 'bloccorisultato'
-  RESULT_CENTRAL = 'corpocentrale'
-  CLASS_ATTRIBUTE_NAME = 'class'
-  EMPTY_STRING = ''
-  WHITESPACE = ' '
-  SUPPRESSED_STOP = 'Fermata soppressa'
+  RESULT_BLOCK = 'bloccorisultato'.freeze
+  RESULT_CENTRAL = 'corpocentrale'.freeze
+  CLASS_ATTRIBUTE_NAME = 'class'.freeze
+  EMPTY_STRING = ''.freeze
+  WHITESPACE = ' '.freeze
+  SUPPRESSED_STOP = 'Fermata soppressa'.freeze
 
   # utility method
   def self.remove_newlines_tabs_and_spaces(str)
