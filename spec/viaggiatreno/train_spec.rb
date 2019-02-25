@@ -134,7 +134,51 @@ describe Train do
       expect(@train.stops.map(&:actual_platform)).to eq \
         [nil, "4", "3", "2", "2", "1", "1", "2", nil, nil]
       expect(@train.stops.map(&:state)).to eq \
-        ["DONE", "DONE", "DONE", "DONE", "DONE", "DONE", "DONE", "DONE", "SUPPRESSED", "SUPPRESSED"]
+      [TrainStopState::DONE] * (@train.stops.size - 2) + [TrainStopState::SUPPRESSED] * 2
+    end
+  end
+
+  describe 'Arrived train with suppressed stops at the beginning' do
+    before do
+      VCR.use_cassette('Arrived train with suppressed stops at the beginning') do
+        @train = Train.new('22027')
+      end
+    end
+
+    it do
+      expect(@train.train_name).to eq 'REG 22027'
+      expect(@train.train_number).to eq '22027'
+      expect(@train.state).to eq TrainState::ARRIVED
+      expect(@train.delay).to eq(1)
+      expect(@train.status).to eq \
+        'Il treno e\' arrivato con 1 minuti di ritardo. Treno cancellato da FIUMICINO AEROPORTO a ROMA OSTIENSE. Parte da ROMA OSTIENSE.'
+      expect(@train.last_update).to eq nil
+      expect(@train.last_stop.train_station).to eq 'FARA SABINA'
+      expect(@train.departing_station).to eq 'ROMA OSTIENSE'
+      expect(@train.arriving_station).to eq 'FARA SABINA'
+      expect(@train.scheduled_departing_time).to eq '10:01'
+      expect(@train.scheduled_arriving_time).to eq '10:57'
+      expect(@train.scheduled_departing_platform).to eq '11'
+      expect(@train.scheduled_arriving_platform).to eq '3'
+      expect(@train.actual_departing_time).to eq '10:07'
+      expect(@train.actual_arriving_time).to eq '10:57'
+      expect(@train.actual_departing_platform).to eq nil
+      expect(@train.actual_arriving_platform).to eq '3'
+      expect(@train.scheduled_stop_time('ROMA TRASTEVERE')).to eq '09:53'
+      expect(@train.actual_stop_time('ROMA TRASTEVERE')).to eq nil
+      expect(@train.find_stop('ROMA TRASTEVERE').state).to eq TrainStopState::SUPPRESSED
+      expect(@train.stops.map(&:train_station)).to eq \
+        ["FIUMICINO AEROPORTO", "PARCO LEONARDO", "FIERA DI ROMA", "PONTE GALERIA", "MURATELLA", "MAGLIANA", "VILLA BONELLI", "ROMA TRASTEVERE", "ROMA OSTIENSE", "ROMA TUSCOLANA", "ROMA TIBURTINA", "ROMA NOMENTANA L.L.", "NUOVO SALARIO", "FIDENE", "SETTE BAGNI", "MONTEROTONDO", "PIANA BELLA MONTELIBRETTI", "FARA SABINA"]
+      expect(@train.stops.map(&:scheduled_stop_time)).to eq \
+        ["09:27", "09:32", "09:35", "09:38", "09:43", "09:46", "09:49", "09:53", "10:01", "10:07", "10:15", "10:19", "10:25", "10:29", "10:34", "10:43", "10:48", "10:57"]
+      expect(@train.stops.map(&:actual_stop_time)).to eq \
+        [nil, nil, nil, nil, nil, nil, nil, nil, "10:07", "10:12", "10:22", "10:27", "10:30", "10:34", "10:39", "10:46", "10:51", "10:57"]
+      expect(@train.stops.map(&:scheduled_platform)).to eq \
+        ["11", nil, nil, nil, nil, nil, nil, nil, "9", "4", "1", "1", "2", "2", "3", "3", "2 II", "3"]
+      expect(@train.stops.map(&:actual_platform)).to eq \
+        [nil, nil, nil, nil, nil, nil, nil, nil, nil, "4", "1", nil, nil, "2", "3", "3", "2", "3"]
+      expect(@train.stops.map(&:state)).to eq \
+        [TrainStopState::SUPPRESSED] * 8 + [TrainStopState::DONE] * (@train.stops.size - 8)
     end
   end
 
