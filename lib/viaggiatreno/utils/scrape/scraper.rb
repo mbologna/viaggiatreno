@@ -72,7 +72,8 @@ class TrainScraper
   end
 
   def fetch_train_delay
-    return nil if @train.state == TrainState::NOT_DEPARTED or @train.state == TrainState::SUPPRESSED
+    return nil if @train.state == TrainState::NOT_DEPARTED || @train.state == TrainState::SUPPRESSED
+
     if @train.status =~ RegExMatchInfo::TRAIN_NODELAY_STR
       @train.delay = 0
     else
