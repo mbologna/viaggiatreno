@@ -9,5 +9,5 @@ class RegExMatchInfo
   TRAIN_STOP_ALREADY_DONE = /giaeffettuate/.freeze
   TRAIN_STOP_PLATFORM =
     /Binario Previsto: ([a-zA-Z0-9 ]*).*Binario Reale: ([a-zA-Z0-9 ]*)/.freeze
-  STATION_NAME = /Stazione di (.*)/
+  STATION_NAME = /Stazione di (.*)/.freeze
 end
