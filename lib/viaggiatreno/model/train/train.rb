@@ -23,7 +23,7 @@ class Train
 
   def departing_station
     stops.each do |stop|
-      if stop.state == TrainStopState::DONE or stop.state == TrainStopState::TO_BE_DONE
+      if stop.state == TrainStopState::DONE || stop.state == TrainStopState::TO_BE_DONE
         return stop.train_station
       end
     end
@@ -40,7 +40,7 @@ class Train
 
   def scheduled_departing_time
     stops.each do |stop|
-      if stop.state == TrainStopState::DONE or stop.state == TrainStopState::TO_BE_DONE
+      if stop.state == TrainStopState::DONE || stop.state == TrainStopState::TO_BE_DONE
         return stop.scheduled_stop_time
       end
     end
@@ -67,14 +67,14 @@ class Train
   end
 
   def actual_arriving_time
-    if state == TrainState::NOT_DEPARTED or state == TrainState::SUPPRESSED
+    if state == TrainState::NOT_DEPARTED || state == TrainState::SUPPRESSED
       return nil
     end
     stops.last.actual_stop_time 
   end
 
   def actual_departing_platform
-    if state == TrainState::NOT_DEPARTED or state == TrainState::SUPPRESSED
+    if state == TrainState::NOT_DEPARTED || state == TrainState::SUPPRESSED
       return nil
     end
     stops.first.actual_platform
@@ -94,9 +94,9 @@ class Train
     return nil if state == TrainState::NOT_DEPARTED || state == TrainState::SUPPRESSED
 
     stops.each_with_index do |stop, index|
-      if index != stops.size - 1 and stop.state == TrainStopState::DONE &&
+      if index != stops.size - 1 && stop.state == TrainStopState::DONE &&
          stops[index + 1].state != TrainStopState::DONE
-         return stop
+        return stop
       end
     end
     stops.last
