@@ -63,14 +63,19 @@ class Train
   end
 
   def actual_departing_time
-    stops.first.actual_stop_time
+    stops.each do |stop|
+      if stop.state == TrainStopState::DONE || stop.state == TrainStopState::TO_BE_DONE
+        return stop.actual_stop_time
+      end
+    end
   end
 
   def actual_arriving_time
     if state == TrainState::NOT_DEPARTED || state == TrainState::SUPPRESSED
       return nil
     end
-    stops.last.actual_stop_time 
+
+    stops.last.actual_stop_time
   end
 
   def actual_departing_platform
