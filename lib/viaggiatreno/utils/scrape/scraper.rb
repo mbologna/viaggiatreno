@@ -109,7 +109,7 @@ class TrainScraper
         scheduled_platform = second_match[1].strip
         actual_platform = second_match[2].strip
       elsif index == (@result_train_detail.search(XPathMatchInfo::TRAIN_DETAILS_GENERIC).size - 1)
-        if @train.state == TrainState::ARRIVED || @train.state == TrainState::NOT_DEPARTED
+        if @result_train.search(XPathMatchInfo::TRAIN_DETAILS_GENERIC).size == 2 # already did a stop TODO
           second_match = StringUtils.remove_newlines_tabs_and_spaces(@result_train.search(XPathMatchInfo::TRAIN_DETAILS_GENERIC)[1].text).match(RegExMatchInfo::TRAIN_STOP_PLATFORM)
         else
           second_match = StringUtils.remove_newlines_tabs_and_spaces(@result_train.search(XPathMatchInfo::TRAIN_DETAILS_GENERIC)[2].text).match(RegExMatchInfo::TRAIN_STOP_PLATFORM)
