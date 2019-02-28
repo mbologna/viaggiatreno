@@ -7,7 +7,7 @@ Gem::Specification.new do |gem|
   gem.name          = 'viaggiatreno'
   gem.version       = Viaggiatreno::VERSION
   gem.authors       = ['Michele Bologna']
-  gem.email         = ['michele.bologna@gmail.com']
+  gem.email         = ['mb@michelebologna.net']
   gem.description   = 'A web scraper to fetch real time information
                       on train riding the Italian railway system
                       (viaggiatreno/trenitalia)'
