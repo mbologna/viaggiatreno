@@ -2,5 +2,9 @@
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
   "extends": [
     "github>mbologna/.github//renovate-config.json"
-  ]
+  ],
+  "lockFileMaintenance": {
+    "description": "Gemfile.lock is gitignored in this gem repo, so there is no lock file to maintain.",
+    "enabled": false
+  }
 }
