@@ -2,8 +2,7 @@
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 
-This gem parses Italian railway real-time status for trains (viaggiatreno.it).
-Use this API to fetch online information about Italian trains.
+A Ruby gem that reads the real-time status of Italian trains from [viaggiatreno.it](http://www.viaggiatreno.it/), Trenitalia's train tracker: the delay, the last stop, and the scheduled and actual times at each stop.
 
 ## Installation
 
