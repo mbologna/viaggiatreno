@@ -1,0 +1,15 @@
+name: Commits
+
+# Pull requests are rebase-merged, so every commit lands on the default branch
+# as it is, and auto-release reads the subjects: each must follow the commit
+# rules (the shared commitlint base).
+
+"on":
+  pull_request:
+
+permissions:
+  pull-requests: read
+
+jobs:
+  commits:
+    uses: mbologna/.github/.github/workflows/commits.yml@83d39a4240d67465401ca87bfea7dd0fe33d3fe3 # main
